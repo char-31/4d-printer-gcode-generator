@@ -1,0 +1,17 @@
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\obj\Debug\net6.0-windows\G-CODE Generator.csproj.AssemblyReference.cache
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\obj\Debug\net6.0-windows\G_CODE_Generator.selection_form.resources
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\obj\Debug\net6.0-windows\G-CODE Generator.csproj.GenerateResource.cache
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\obj\Debug\net6.0-windows\G-CODE Generator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\obj\Debug\net6.0-windows\G-CODE Generator.AssemblyInfoInputs.cache
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\obj\Debug\net6.0-windows\G-CODE Generator.AssemblyInfo.cs
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\obj\Debug\net6.0-windows\G-CODE Generator.csproj.CoreCompileInputs.cache
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\bin\Debug\net6.0-windows\G-CODE Generator.exe
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\bin\Debug\net6.0-windows\G-CODE Generator.deps.json
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\bin\Debug\net6.0-windows\G-CODE Generator.runtimeconfig.json
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\bin\Debug\net6.0-windows\G-CODE Generator.dll
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\bin\Debug\net6.0-windows\ref\G-CODE Generator.dll
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\bin\Debug\net6.0-windows\G-CODE Generator.pdb
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\obj\Debug\net6.0-windows\G-CODE Generator.dll
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\obj\Debug\net6.0-windows\ref\G-CODE Generator.dll
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\obj\Debug\net6.0-windows\G-CODE Generator.pdb
+C:\Users\mossc\Documents\G-Code Software\G-CODE Generator\G-CODE Generator\obj\Debug\net6.0-windows\G-CODE Generator.genruntimeconfig.cache
