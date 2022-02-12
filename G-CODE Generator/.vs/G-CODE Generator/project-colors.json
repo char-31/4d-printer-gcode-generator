@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "adeb4ba8-4dea-46d8-a8a6-41a94f51044f": {
+      "ProjectGuid": "adeb4ba8-4dea-46d8-a8a6-41a94f51044f",
+      "DisplayName": "G-CODE Generator",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
