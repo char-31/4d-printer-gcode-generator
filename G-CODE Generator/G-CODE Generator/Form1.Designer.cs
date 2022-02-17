@@ -61,7 +61,7 @@
             this.base_radiobutton.TabStop = true;
             this.base_radiobutton.Text = "Base Layer";
             this.base_radiobutton.UseVisualStyleBackColor = true;
-            this.base_radiobutton.CheckedChanged += new System.EventHandler(this.base_radiobutton_CheckedChanged);
+            //this.base_radiobutton.CheckedChanged += new System.EventHandler(this.base_radiobutton_CheckedChanged);
             // 
             // silver_radiobutton
             // 
