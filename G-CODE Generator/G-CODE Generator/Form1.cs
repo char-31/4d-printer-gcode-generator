@@ -2,6 +2,7 @@ namespace G_CODE_Generator
 {
     using System;
     using System.IO;
+    using System.Text;
     using System.Text.RegularExpressions;
     public partial class selection_form : Form
     {
@@ -25,24 +26,34 @@ namespace G_CODE_Generator
             //BASE Radio Button Code
             if (base_radiobutton.Checked == true)
             {
+                //The First phrase to find in the text (cutoff point)
+                string pattern1 = @"Z:3.2";
+
                 string line;
-                int count = 0;
-                //The pattern to find in the text
-                string pattern = @"Z:3.2";
+                int find1 = 0;
+
+                //FINDS PHRASE AND WRITES NEW TEXT FILE UP FROM START TO PREVIOUS LINE
                 try
                 {
-                    //Pass the file path and file name to the StreamReader constructor (Make sure any \ characters become \\)
-                    StreamReader sr = new StreamReader("C:\\Users\\mossc\\Documents\\~Purdue\\4D Print RESEARCH\\visual_studio_test.GCODE");
+                    //Pass the file path and file name to the StreamReader constructor (**Make sure any \ characters become \\**)
+                    StreamReader sr = new StreamReader("C:\\Users\\mossc\\Downloads\\BusinessBRICK.gcode");
+                    StreamWriter sw = new StreamWriter("C:\\Users\\mossc\\Documents\\~Base1.GCODE", true, Encoding.ASCII);
                     //Read the first line of text
                     line = sr.ReadLine();
                     //Continue to read until you reach end of file
-                    while (line != null)
+                    while (find1 == 0 && line != null)
                     {
-                        count += 1;
-                        Match m_code = Regex.Match(line, pattern, RegexOptions.IgnoreCase);
+                        //Search for pattern in current line
+                        Match m_code = Regex.Match(line, pattern1, RegexOptions.IgnoreCase);
                         if (m_code.Success)
                         {
-                            this.output_text.Text += "Found " + m_code.Value + " at line " + count + " position " + (m_code.Index + 1) + "\r\n";
+                            this.output_text.Text += "Found " + m_code.Value + "\r\n";
+                            //Can add: at m_code.Index
+                            find1 = 1;
+                        }
+                        else
+                        {
+                            sw.WriteLine(line);
                         }
                         //Display the line to output text box (debugging only)
                         //this.output_text.Text += line + "\r\n";
@@ -51,24 +62,95 @@ namespace G_CODE_Generator
                     }
                     //close the file
                     sr.Close();
+                    sw.Close();
                     Console.ReadLine();
                 }
+                finally
+                {
+                    this.output_text.Text += "Search and Write Complete. \r\n";
+                    if (find1 == 0)
+                    {
+                        this.output_text.Text += "Phrase not found in text. \r\n";
+                    }
+                }
 
+                //FIND AND WRITE ENDING PORTION OF THE CODE
+                string pattern2 = @"G92 E0";
+                int find2 = 0;
+                int countLine = 0;
+                try
+                {
+                    //Pass the file path and file name to the StreamReader constructor (**Make sure any \ characters become \\**)
+                    StreamReader sr = new StreamReader("C:\\Users\\mossc\\Downloads\\BusinessBRICK.gcode");
+                    //Read the first line of text
+                    line = sr.ReadLine();
+                    //Continue to read until you reach end of file
+                    while (find2 == 0 && line != null)
+                    {
+                        countLine += 1;
+                        //Search for pattern in current line
+                        Match m_code = Regex.Match(line, pattern2, RegexOptions.IgnoreCase);
+                        if (m_code.Success)
+                        {
+                            this.output_text.Text += "Found " + m_code.Value + " at line " + countLine + "\r\n";
+                            find2 = 1;
+
+                        }
+                        //Read the next line
+                        line = sr.ReadLine();
+                    }
+                    //close the file
+                    sr.Close();
+                    Console.ReadLine();
+                }
                 finally
                 {
                     this.output_text.Text += "Search Complete. \r\n";
+                    if (find2 == 0)
+                    {
+                        this.output_text.Text += "Phrase not found in text. \r\n";
+                    }
                 }
 
-               
-            }
-           
+                if (find2 == 1)
+                {
 
+                    int count = 0;
+                    try
+                    {
+                        //Pass the file path and file name to the StreamReader constructor (**Make sure any \ characters become \\**)
+                        StreamReader sr = new StreamReader("C:\\Users\\mossc\\Downloads\\BusinessBRICK.gcode");
+                        StreamWriter sw = new StreamWriter("C:\\Users\\mossc\\Documents\\~Base1.GCODE", true, Encoding.ASCII);
+                        //Read the first line of text
+                        line = sr.ReadLine();
+                        while (count < (countLine - 2))
+                        {
+                            count += 1;
+                            line = sr.ReadLine();
+                        }
+                        while (line != null)
+                        {
+                            count += 1;
+                            line = sr.ReadLine();
+                            sw.WriteLine(line);
+
+                        }
+                        //close the file
+                        sr.Close();
+                        sw.Close();
+                        Console.ReadLine();
+                    }
+                    finally
+                    {
+                        this.output_text.Text += "Write Complete. \r\n";
+                    }
+                }
+            }
         }
 
         //Enter your code for BASE Radio Button here
 
         //
-
         //Enter your code for SILVER LINES Radio Button here
 
         //
