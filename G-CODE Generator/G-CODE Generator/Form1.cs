@@ -13,7 +13,7 @@ namespace G_CODE_Generator
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         //All of your code that involves "checking if buttons are clicked" must be in "private void button_generate_Click" which will be refered to as the main body
@@ -31,13 +31,15 @@ namespace G_CODE_Generator
 
                 string line;
                 int find1 = 0;
+                string base_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\visual_studio_test.GCODE";
+                string copy_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\~Base1.GCODE";
 
-                //FINDS PHRASE AND WRITES NEW TEXT FILE UP FROM START TO PREVIOUS LINE
+                //FINDS PHRASE AND WRITES NEW TEXT FILE FROM START TO LINE WHERE THE PHRASE IS FOUND
                 try
                 {
                     //Pass the file path and file name to the StreamReader constructor (**Make sure any \ characters become \\**)
-                    StreamReader sr = new StreamReader("C:\\Users\\mossc\\Downloads\\BusinessBRICK.gcode");
-                    StreamWriter sw = new StreamWriter("C:\\Users\\mossc\\Documents\\~Base1.GCODE", true, Encoding.ASCII);
+                    StreamReader sr = new StreamReader(base_gcode);
+                    StreamWriter sw = new StreamWriter(copy_gcode, true, Encoding.ASCII);
                     //Read the first line of text
                     line = sr.ReadLine();
                     //Continue to read until you reach end of file
@@ -57,6 +59,7 @@ namespace G_CODE_Generator
                         }
                         //Display the line to output text box (debugging only)
                         //this.output_text.Text += line + "\r\n";
+
                         //Read the next line
                         line = sr.ReadLine();
                     }
@@ -81,7 +84,7 @@ namespace G_CODE_Generator
                 try
                 {
                     //Pass the file path and file name to the StreamReader constructor (**Make sure any \ characters become \\**)
-                    StreamReader sr = new StreamReader("C:\\Users\\mossc\\Downloads\\BusinessBRICK.gcode");
+                    StreamReader sr = new StreamReader(base_gcode);
                     //Read the first line of text
                     line = sr.ReadLine();
                     //Continue to read until you reach end of file
@@ -119,8 +122,8 @@ namespace G_CODE_Generator
                     try
                     {
                         //Pass the file path and file name to the StreamReader constructor (**Make sure any \ characters become \\**)
-                        StreamReader sr = new StreamReader("C:\\Users\\mossc\\Downloads\\BusinessBRICK.gcode");
-                        StreamWriter sw = new StreamWriter("C:\\Users\\mossc\\Documents\\~Base1.GCODE", true, Encoding.ASCII);
+                        StreamReader sr = new StreamReader(base_gcode);
+                        StreamWriter sw = new StreamWriter(copy_gcode, true, Encoding.ASCII);
                         //Read the first line of text
                         line = sr.ReadLine();
                         while (count < (countLine - 2))

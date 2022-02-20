@@ -41,10 +41,9 @@
             // 
             // button_generate
             // 
-            this.button_generate.Location = new System.Drawing.Point(709, 917);
-            this.button_generate.Margin = new System.Windows.Forms.Padding(2);
+            this.button_generate.Location = new System.Drawing.Point(1064, 1357);
             this.button_generate.Name = "button_generate";
-            this.button_generate.Size = new System.Drawing.Size(113, 35);
+            this.button_generate.Size = new System.Drawing.Size(170, 52);
             this.button_generate.TabIndex = 0;
             this.button_generate.Text = "OK";
             this.button_generate.UseVisualStyleBackColor = true;
@@ -53,23 +52,20 @@
             // base_radiobutton
             // 
             this.base_radiobutton.AutoSize = true;
-            this.base_radiobutton.Location = new System.Drawing.Point(31, 84);
-            this.base_radiobutton.Margin = new System.Windows.Forms.Padding(2);
+            this.base_radiobutton.Location = new System.Drawing.Point(46, 124);
             this.base_radiobutton.Name = "base_radiobutton";
-            this.base_radiobutton.Size = new System.Drawing.Size(119, 29);
+            this.base_radiobutton.Size = new System.Drawing.Size(172, 41);
             this.base_radiobutton.TabIndex = 1;
             this.base_radiobutton.TabStop = true;
             this.base_radiobutton.Text = "Base Layer";
             this.base_radiobutton.UseVisualStyleBackColor = true;
-            //this.base_radiobutton.CheckedChanged += new System.EventHandler(this.base_radiobutton_CheckedChanged);
             // 
             // silver_radiobutton
             // 
             this.silver_radiobutton.AutoSize = true;
-            this.silver_radiobutton.Location = new System.Drawing.Point(31, 128);
-            this.silver_radiobutton.Margin = new System.Windows.Forms.Padding(2);
+            this.silver_radiobutton.Location = new System.Drawing.Point(46, 189);
             this.silver_radiobutton.Name = "silver_radiobutton";
-            this.silver_radiobutton.Size = new System.Drawing.Size(131, 29);
+            this.silver_radiobutton.Size = new System.Drawing.Size(191, 41);
             this.silver_radiobutton.TabIndex = 2;
             this.silver_radiobutton.TabStop = true;
             this.silver_radiobutton.Text = "Silver Traces";
@@ -78,10 +74,9 @@
             // void_radiobutton
             // 
             this.void_radiobutton.AutoSize = true;
-            this.void_radiobutton.Location = new System.Drawing.Point(31, 176);
-            this.void_radiobutton.Margin = new System.Windows.Forms.Padding(2);
+            this.void_radiobutton.Location = new System.Drawing.Point(46, 260);
             this.void_radiobutton.Name = "void_radiobutton";
-            this.void_radiobutton.Size = new System.Drawing.Size(81, 29);
+            this.void_radiobutton.Size = new System.Drawing.Size(113, 41);
             this.void_radiobutton.TabIndex = 3;
             this.void_radiobutton.TabStop = true;
             this.void_radiobutton.Text = "Voids";
@@ -90,10 +85,9 @@
             // glue_radiobutton
             // 
             this.glue_radiobutton.AutoSize = true;
-            this.glue_radiobutton.Location = new System.Drawing.Point(293, 84);
-            this.glue_radiobutton.Margin = new System.Windows.Forms.Padding(2);
+            this.glue_radiobutton.Location = new System.Drawing.Point(440, 124);
             this.glue_radiobutton.Name = "glue_radiobutton";
-            this.glue_radiobutton.Size = new System.Drawing.Size(168, 29);
+            this.glue_radiobutton.Size = new System.Drawing.Size(245, 41);
             this.glue_radiobutton.TabIndex = 4;
             this.glue_radiobutton.TabStop = true;
             this.glue_radiobutton.Text = "Anisotropic Glue";
@@ -102,10 +96,9 @@
             // resin_button
             // 
             this.resin_button.AutoSize = true;
-            this.resin_button.Location = new System.Drawing.Point(293, 128);
-            this.resin_button.Margin = new System.Windows.Forms.Padding(2);
+            this.resin_button.Location = new System.Drawing.Point(440, 189);
             this.resin_button.Name = "resin_button";
-            this.resin_button.Size = new System.Drawing.Size(78, 29);
+            this.resin_button.Size = new System.Drawing.Size(110, 41);
             this.resin_button.TabIndex = 5;
             this.resin_button.TabStop = true;
             this.resin_button.Text = "Resin";
@@ -114,10 +107,9 @@
             // top_radiobutton
             // 
             this.top_radiobutton.AutoSize = true;
-            this.top_radiobutton.Location = new System.Drawing.Point(293, 176);
-            this.top_radiobutton.Margin = new System.Windows.Forms.Padding(2);
+            this.top_radiobutton.Location = new System.Drawing.Point(440, 260);
             this.top_radiobutton.Name = "top_radiobutton";
-            this.top_radiobutton.Size = new System.Drawing.Size(112, 29);
+            this.top_radiobutton.Size = new System.Drawing.Size(161, 41);
             this.top_radiobutton.TabIndex = 6;
             this.top_radiobutton.TabStop = true;
             this.top_radiobutton.Text = "Top Layer";
@@ -125,29 +117,29 @@
             // 
             // output_text
             // 
-            this.output_text.Location = new System.Drawing.Point(1295, 11);
-            this.output_text.Margin = new System.Windows.Forms.Padding(2);
+            this.output_text.Location = new System.Drawing.Point(1942, 16);
             this.output_text.Multiline = true;
             this.output_text.Name = "output_text";
             this.output_text.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.output_text.Size = new System.Drawing.Size(409, 941);
+            this.output_text.Size = new System.Drawing.Size(612, 1391);
             this.output_text.TabIndex = 7;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(12, 707);
+            this.checkBox1.Location = new System.Drawing.Point(46, 900);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(121, 29);
+            this.checkBox1.Size = new System.Drawing.Size(173, 41);
             this.checkBox1.TabIndex = 8;
             this.checkBox1.Text = "checkBox1";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // selection_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1715, 963);
+            this.ClientSize = new System.Drawing.Size(2572, 1425);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.output_text);
             this.Controls.Add(this.top_radiobutton);
@@ -157,7 +149,6 @@
             this.Controls.Add(this.silver_radiobutton);
             this.Controls.Add(this.base_radiobutton);
             this.Controls.Add(this.button_generate);
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "selection_form";
             this.Text = "Initial Selection";
             this.Load += new System.EventHandler(this.Form1_Load);
