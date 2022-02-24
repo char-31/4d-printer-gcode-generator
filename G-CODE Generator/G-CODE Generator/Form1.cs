@@ -26,24 +26,27 @@ namespace G_CODE_Generator
             //BASE Radio Button Code
             if (base_radiobutton.Checked == true)
             {
-                //The First phrase to find in the text (cutoff point)
-                string pattern1 = @"Z:3.2";
+                //Patterns to Find in Code
+                string pattern1 = @"Z:3.2";     //Will only find the first instance of pattern
+                string pattern2 = @"END CODE";  //Will only find last instance of pattern
 
-                string line;
-                int find1 = 0;
-                // Make sure any \ become \\`
-                string base_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\BusinessBRICK.gcode";
-                string copy_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\~Brick1.gcode";
+                // Make sure any "\" become "\\"
+                string base_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\BusinessBRICK.gcode";  //Complete GCODE file for the part
+                string copy_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\~Brick1.GCODE";        //Creates file or adds on to existing file
+                
+                string line;        //Variable for current line of text read
+                int find1 = 0;      //Varible to note when pattern has been found
 
-                //FINDS PHRASE AND WRITES NEW TEXT FILE FROM START TO LINE WHERE THE PHRASE IS FOUND
+                //FINDS 1ST PHRASE AND WRITES NEW TEXT FILE FROM START TO LINE WHERE THE PHRASE IS FOUND
+                //          Does both reading and writing at the same time up to pattern 1
                 try
                 {
-                    //Pass the file path and file name to the StreamReader constructor
+                    //Pass the file path and file name to the StreamReader constructor and StreamWriter constructor
                     StreamReader sr = new StreamReader(base_gcode);
                     StreamWriter sw = new StreamWriter(copy_gcode, true, Encoding.ASCII);
                     //Read the first line of text
                     line = sr.ReadLine();
-                    //Continue to read until you reach end of file
+                    //Continue to read until you reach end of file or when the 1st pattern has been found
                     while (find1 == 0 && line != null)
                     {
                         //Search for pattern in current line
@@ -74,6 +77,8 @@ namespace G_CODE_Generator
                 finally
                 {
                     this.output_text.Text += "Search and Write Complete. \r\n";
+
+                    //If not successful, will output this phrase (and the whole text file will be copied to the new one)
                     if (find1 == 0)
                     {
                         this.output_text.Text += "Phrase not found in text. \r\n";
@@ -81,12 +86,11 @@ namespace G_CODE_Generator
                 }
 
 
-
-                //FIND AND WRITE ENDING PORTION OF THE CODE
-                string pattern2 = @"G92 E0";
-                int find2 = 0;
-                int countLine = 0;
-                int lastLine = 0;
+                //FIND AND WRITE ENDING PORTION OF THE CODE (FINDS 2ND PATTERN)
+                //          Reads the whole file to find the last instance of pattern and then writes from line containing pattern to the end of the file
+                int find2 = 0;          //Keeps track of if the pattern is found in the text file
+                int countLine = 0;      //Counts line numbers to keep track of where the patterns are found
+                int lastLine = 0;       //For finding the last instance of the 2nd pattern
                 try
                 {
                     //Pass the file path and file name to the StreamReader constructor
@@ -103,7 +107,7 @@ namespace G_CODE_Generator
                         {
                             //this.output_text.Text += "Found " + m_code.Value + " at line " + countLine + "\r\n";
                             find2 += 1;
-                            lastLine = countLine;
+                            lastLine = countLine;       //Will note the line number of the last instance of the pattern
 
                         }
                         //Read the next line
@@ -116,31 +120,36 @@ namespace G_CODE_Generator
                 finally
                 {
                     this.output_text.Text += "Search Complete. \r\n";
+
+                    //If the phrase is not found, will output this and will not do the next writing section to the text file
                     if (find2 == 0)
                     {
                         this.output_text.Text += "Phrase not found in text. \r\n";
                     }
                 }
 
+                //Will complete only if the 2nd phrase was found
                 if (find2 > 0)
                 {
-
                     int count = 0;
                     try
                     {
-                        //Pass the file path and file name to the StreamReader constructor (**Make sure any \ characters become \\**)
+                        //Pass the file path and file name to the StreamReader and StreamWriter constructor
                         StreamReader sr = new StreamReader(base_gcode);
                         StreamWriter sw = new StreamWriter(copy_gcode, true, Encoding.ASCII);
                         //Read the first line of text
                         line = sr.ReadLine();
+
+                        //Reads to the line before the second pattern
                         while (count < (lastLine - 2))
                         {
                             count += 1;
                             line = sr.ReadLine();
                         }
+
+                        //Starts writing from selected line to the end of the text file
                         while (line != null)
                         {
-                            count += 1;
                             line = sr.ReadLine();
                             sw.WriteLine(line);
 
@@ -156,7 +165,7 @@ namespace G_CODE_Generator
                     }
                 }
             }
-
+            //End of BASE Button Code
 
 
             //SILVER LINES Radio Button Code
