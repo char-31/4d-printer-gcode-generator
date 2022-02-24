@@ -31,13 +31,14 @@ namespace G_CODE_Generator
 
                 string line;
                 int find1 = 0;
-                string base_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\visual_studio_test.GCODE";
-                string copy_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\~Base1.GCODE";
+                // Make sure any \ become \\`
+                string base_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\BusinessBRICK.gcode";
+                string copy_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\~Brick1.gcode";
 
                 //FINDS PHRASE AND WRITES NEW TEXT FILE FROM START TO LINE WHERE THE PHRASE IS FOUND
                 try
                 {
-                    //Pass the file path and file name to the StreamReader constructor (**Make sure any \ characters become \\**)
+                    //Pass the file path and file name to the StreamReader constructor
                     StreamReader sr = new StreamReader(base_gcode);
                     StreamWriter sw = new StreamWriter(copy_gcode, true, Encoding.ASCII);
                     //Read the first line of text
@@ -49,9 +50,10 @@ namespace G_CODE_Generator
                         Match m_code = Regex.Match(line, pattern1, RegexOptions.IgnoreCase);
                         if (m_code.Success)
                         {
-                            this.output_text.Text += "Found " + m_code.Value + "\r\n";
+                            //this.output_text.Text += "Found " + m_code.Value + "\r\n";
                             //Can add: at m_code.Index
                             find1 = 1;
+                            sw.WriteLine(line);
                         }
                         else
                         {
@@ -63,6 +65,7 @@ namespace G_CODE_Generator
                         //Read the next line
                         line = sr.ReadLine();
                     }
+
                     //close the file
                     sr.Close();
                     sw.Close();
@@ -77,26 +80,30 @@ namespace G_CODE_Generator
                     }
                 }
 
+
+
                 //FIND AND WRITE ENDING PORTION OF THE CODE
                 string pattern2 = @"G92 E0";
                 int find2 = 0;
                 int countLine = 0;
+                int lastLine = 0;
                 try
                 {
-                    //Pass the file path and file name to the StreamReader constructor (**Make sure any \ characters become \\**)
+                    //Pass the file path and file name to the StreamReader constructor
                     StreamReader sr = new StreamReader(base_gcode);
                     //Read the first line of text
                     line = sr.ReadLine();
                     //Continue to read until you reach end of file
-                    while (find2 == 0 && line != null)
+                    while (line != null)
                     {
                         countLine += 1;
                         //Search for pattern in current line
                         Match m_code = Regex.Match(line, pattern2, RegexOptions.IgnoreCase);
                         if (m_code.Success)
                         {
-                            this.output_text.Text += "Found " + m_code.Value + " at line " + countLine + "\r\n";
-                            find2 = 1;
+                            //this.output_text.Text += "Found " + m_code.Value + " at line " + countLine + "\r\n";
+                            find2 += 1;
+                            lastLine = countLine;
 
                         }
                         //Read the next line
@@ -115,7 +122,7 @@ namespace G_CODE_Generator
                     }
                 }
 
-                if (find2 == 1)
+                if (find2 > 0)
                 {
 
                     int count = 0;
@@ -126,7 +133,7 @@ namespace G_CODE_Generator
                         StreamWriter sw = new StreamWriter(copy_gcode, true, Encoding.ASCII);
                         //Read the first line of text
                         line = sr.ReadLine();
-                        while (count < (countLine - 2))
+                        while (count < (lastLine - 2))
                         {
                             count += 1;
                             line = sr.ReadLine();
@@ -149,6 +156,10 @@ namespace G_CODE_Generator
                     }
                 }
             }
+
+
+
+            //SILVER LINES Radio Button Code
         }
 
         //Enter your code for BASE Radio Button here
