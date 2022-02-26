@@ -298,6 +298,25 @@ namespace G_CODE_Generator
                 }
             }
 
+            //TOP Layer Button Code
+            if (top_radiobutton.Checked == true)
+            {
+                //Patterns to Find in Code
+                string top_pattern1 = @"END INITIALIZATION";       //First pattern (end of initialization)
+                string top_pattern2 = @"Z:5";                    //Second pattern (begining of final section- top and end sections)
+
+                // Make sure any "\" become "\\"
+                string base_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\visual_studio_test2.GCODE";             //Complete GCODE file for the part
+                string copy_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\~Top1.GCODE";        //Creates file or adds on to existing file
+
+                //Calls function to copy initialization section of gcode (up to pattern 1)
+                Copy_Initialization(top_pattern1, base_gcode, copy_gcode);
+
+                //Calls function to copy final section that includes the top section and the end section (from pattern 2 to end)
+                Copy_End(top_pattern2, base_gcode, copy_gcode);
+
+            }
+
 
         }
 
@@ -706,20 +725,21 @@ namespace G_CODE_Generator
 
         }
 
+
         //Enter your code for VOIDS Radio Button here
 
-        
+
 
         //Enter your code for ANISOTROPIC GLUE Radio Button here
 
-        
+
 
         //Enter your code for RESIN Radio Button here
 
-        
+
 
         //Enter your code for TOP LAYER Radio Button here
 
-       
+
     }
 }

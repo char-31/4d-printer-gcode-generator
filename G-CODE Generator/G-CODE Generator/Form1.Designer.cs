@@ -73,7 +73,7 @@
             // button_generate
             // 
             this.button_generate.Location = new System.Drawing.Point(1063, 1358);
-            this.button_generate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_generate.Margin = new System.Windows.Forms.Padding(4);
             this.button_generate.Name = "button_generate";
             this.button_generate.Size = new System.Drawing.Size(171, 52);
             this.button_generate.TabIndex = 0;
@@ -85,7 +85,7 @@
             // 
             this.base_radiobutton.AutoSize = true;
             this.base_radiobutton.Location = new System.Drawing.Point(21, 20);
-            this.base_radiobutton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.base_radiobutton.Margin = new System.Windows.Forms.Padding(4);
             this.base_radiobutton.Name = "base_radiobutton";
             this.base_radiobutton.Size = new System.Drawing.Size(172, 41);
             this.base_radiobutton.TabIndex = 1;
@@ -97,7 +97,7 @@
             // 
             this.silver_radiobutton.AutoSize = true;
             this.silver_radiobutton.Location = new System.Drawing.Point(21, 135);
-            this.silver_radiobutton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.silver_radiobutton.Margin = new System.Windows.Forms.Padding(4);
             this.silver_radiobutton.Name = "silver_radiobutton";
             this.silver_radiobutton.Size = new System.Drawing.Size(191, 41);
             this.silver_radiobutton.TabIndex = 2;
@@ -109,7 +109,7 @@
             // 
             this.void_radiobutton.AutoSize = true;
             this.void_radiobutton.Location = new System.Drawing.Point(21, 267);
-            this.void_radiobutton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.void_radiobutton.Margin = new System.Windows.Forms.Padding(4);
             this.void_radiobutton.Name = "void_radiobutton";
             this.void_radiobutton.Size = new System.Drawing.Size(113, 41);
             this.void_radiobutton.TabIndex = 3;
@@ -121,7 +121,7 @@
             // 
             this.glue_radiobutton.AutoSize = true;
             this.glue_radiobutton.Location = new System.Drawing.Point(21, 1177);
-            this.glue_radiobutton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.glue_radiobutton.Margin = new System.Windows.Forms.Padding(4);
             this.glue_radiobutton.Name = "glue_radiobutton";
             this.glue_radiobutton.Size = new System.Drawing.Size(218, 41);
             this.glue_radiobutton.TabIndex = 4;
@@ -133,7 +133,7 @@
             // 
             this.resin_button.AutoSize = true;
             this.resin_button.Location = new System.Drawing.Point(21, 1228);
-            this.resin_button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.resin_button.Margin = new System.Windows.Forms.Padding(4);
             this.resin_button.Name = "resin_button";
             this.resin_button.Size = new System.Drawing.Size(219, 41);
             this.resin_button.TabIndex = 5;
@@ -145,7 +145,7 @@
             // 
             this.top_radiobutton.AutoSize = true;
             this.top_radiobutton.Location = new System.Drawing.Point(21, 1280);
-            this.top_radiobutton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.top_radiobutton.Margin = new System.Windows.Forms.Padding(4);
             this.top_radiobutton.Name = "top_radiobutton";
             this.top_radiobutton.Size = new System.Drawing.Size(161, 41);
             this.top_radiobutton.TabIndex = 6;
@@ -156,7 +156,7 @@
             // GCodeOutputText
             // 
             this.GCodeOutputText.Location = new System.Drawing.Point(1942, 17);
-            this.GCodeOutputText.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GCodeOutputText.Margin = new System.Windows.Forms.Padding(4);
             this.GCodeOutputText.Multiline = true;
             this.GCodeOutputText.Name = "GCodeOutputText";
             this.GCodeOutputText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -166,7 +166,7 @@
             // VoidSuggestion
             // 
             this.VoidSuggestion.Location = new System.Drawing.Point(22, 444);
-            this.VoidSuggestion.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.VoidSuggestion.Margin = new System.Windows.Forms.Padding(6);
             this.VoidSuggestion.Name = "VoidSuggestion";
             this.VoidSuggestion.Size = new System.Drawing.Size(647, 653);
             this.VoidSuggestion.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -187,7 +187,7 @@
             // 
             this.ID_GUI_Value.DecimalPlaces = 2;
             this.ID_GUI_Value.Location = new System.Drawing.Point(1328, 59);
-            this.ID_GUI_Value.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ID_GUI_Value.Margin = new System.Windows.Forms.Padding(6);
             this.ID_GUI_Value.Name = "ID_GUI_Value";
             this.ID_GUI_Value.Size = new System.Drawing.Size(281, 43);
             this.ID_GUI_Value.TabIndex = 10;
@@ -205,7 +205,7 @@
             // XOrigin_GUI_Value
             // 
             this.XOrigin_GUI_Value.Location = new System.Drawing.Point(1328, 157);
-            this.XOrigin_GUI_Value.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.XOrigin_GUI_Value.Margin = new System.Windows.Forms.Padding(6);
             this.XOrigin_GUI_Value.Name = "XOrigin_GUI_Value";
             this.XOrigin_GUI_Value.Size = new System.Drawing.Size(281, 43);
             this.XOrigin_GUI_Value.TabIndex = 12;
@@ -223,7 +223,7 @@
             // YOrigin_GUI_Value
             // 
             this.YOrigin_GUI_Value.Location = new System.Drawing.Point(1328, 255);
-            this.YOrigin_GUI_Value.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.YOrigin_GUI_Value.Margin = new System.Windows.Forms.Padding(6);
             this.YOrigin_GUI_Value.Name = "YOrigin_GUI_Value";
             this.YOrigin_GUI_Value.Size = new System.Drawing.Size(281, 43);
             this.YOrigin_GUI_Value.TabIndex = 14;
@@ -242,7 +242,7 @@
             // 
             this.PC_PartIncluded.AutoSize = true;
             this.PC_PartIncluded.Location = new System.Drawing.Point(1382, 353);
-            this.PC_PartIncluded.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.PC_PartIncluded.Margin = new System.Windows.Forms.Padding(6);
             this.PC_PartIncluded.Name = "PC_PartIncluded";
             this.PC_PartIncluded.Size = new System.Drawing.Size(295, 41);
             this.PC_PartIncluded.TabIndex = 16;
@@ -253,7 +253,7 @@
             // 
             this.BC_PartIncluded.AutoSize = true;
             this.BC_PartIncluded.Location = new System.Drawing.Point(1382, 409);
-            this.BC_PartIncluded.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.BC_PartIncluded.Margin = new System.Windows.Forms.Padding(6);
             this.BC_PartIncluded.Name = "BC_PartIncluded";
             this.BC_PartIncluded.Size = new System.Drawing.Size(180, 41);
             this.BC_PartIncluded.TabIndex = 17;
@@ -264,7 +264,7 @@
             // 
             this.WiFi_PartIncluded.AutoSize = true;
             this.WiFi_PartIncluded.Location = new System.Drawing.Point(1382, 464);
-            this.WiFi_PartIncluded.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.WiFi_PartIncluded.Margin = new System.Windows.Forms.Padding(6);
             this.WiFi_PartIncluded.Name = "WiFi_PartIncluded";
             this.WiFi_PartIncluded.Size = new System.Drawing.Size(317, 41);
             this.WiFi_PartIncluded.TabIndex = 18;
@@ -275,7 +275,7 @@
             // 
             this.Pad_PartIncluded.AutoSize = true;
             this.Pad_PartIncluded.Location = new System.Drawing.Point(1382, 520);
-            this.Pad_PartIncluded.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Pad_PartIncluded.Margin = new System.Windows.Forms.Padding(6);
             this.Pad_PartIncluded.Name = "Pad_PartIncluded";
             this.Pad_PartIncluded.Size = new System.Drawing.Size(182, 41);
             this.Pad_PartIncluded.TabIndex = 19;
@@ -286,7 +286,7 @@
             // 
             this.PadSize_Side.DecimalPlaces = 1;
             this.PadSize_Side.Location = new System.Drawing.Point(1414, 575);
-            this.PadSize_Side.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.PadSize_Side.Margin = new System.Windows.Forms.Padding(6);
             this.PadSize_Side.Name = "PadSize_Side";
             this.PadSize_Side.Size = new System.Drawing.Size(281, 43);
             this.PadSize_Side.TabIndex = 20;
@@ -295,7 +295,7 @@
             // 
             this.SG_PartIncluded.AutoSize = true;
             this.SG_PartIncluded.Location = new System.Drawing.Point(1382, 636);
-            this.SG_PartIncluded.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.SG_PartIncluded.Margin = new System.Windows.Forms.Padding(6);
             this.SG_PartIncluded.Name = "SG_PartIncluded";
             this.SG_PartIncluded.Size = new System.Drawing.Size(201, 41);
             this.SG_PartIncluded.TabIndex = 21;
@@ -305,7 +305,7 @@
             // StrainGaugeLength_X
             // 
             this.StrainGaugeLength_X.Location = new System.Drawing.Point(1414, 729);
-            this.StrainGaugeLength_X.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.StrainGaugeLength_X.Margin = new System.Windows.Forms.Padding(6);
             this.StrainGaugeLength_X.Name = "StrainGaugeLength_X";
             this.StrainGaugeLength_X.Size = new System.Drawing.Size(281, 43);
             this.StrainGaugeLength_X.TabIndex = 22;
@@ -333,7 +333,7 @@
             // StrainGaugeWidth_Y
             // 
             this.StrainGaugeWidth_Y.Location = new System.Drawing.Point(1414, 827);
-            this.StrainGaugeWidth_Y.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.StrainGaugeWidth_Y.Margin = new System.Windows.Forms.Padding(6);
             this.StrainGaugeWidth_Y.Name = "StrainGaugeWidth_Y";
             this.StrainGaugeWidth_Y.Size = new System.Drawing.Size(281, 43);
             this.StrainGaugeWidth_Y.TabIndex = 25;
@@ -357,6 +357,7 @@
             this.label8.Size = new System.Drawing.Size(591, 37);
             this.label8.TabIndex = 27;
             this.label8.Text = "ONLY Base Layer and Silver Traces currently work";
+            //this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // label9
             // 
@@ -446,7 +447,7 @@
             this.Controls.Add(this.silver_radiobutton);
             this.Controls.Add(this.base_radiobutton);
             this.Controls.Add(this.button_generate);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "selection_form";
             this.Text = "GCodeGenerator";
             this.Load += new System.EventHandler(this.Form1_Load);
