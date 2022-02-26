@@ -8,23 +8,25 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\mossc\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\datta\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mossc\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\G-CODE Generator\\G-CODE Generator.csproj",
+      "projectUniqueName": "C:\\Users\\datta\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\G-CODE Generator\\G-CODE Generator.csproj",
       "projectName": "G-CODE Generator",
-      "projectPath": "C:\\Users\\mossc\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\G-CODE Generator\\G-CODE Generator.csproj",
-      "packagesPath": "C:\\Users\\mossc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mossc\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\G-CODE Generator\\obj\\",
+      "projectPath": "C:\\Users\\datta\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\G-CODE Generator\\G-CODE Generator.csproj",
+      "packagesPath": "C:\\Users\\datta\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\datta\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\G-CODE Generator\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\mossc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\datta\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -68,7 +70,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }
