@@ -24,6 +24,8 @@ namespace G_CODE_Generator
         private void button_generate_Click(object sender, EventArgs e)
         {
             //BASE Radio Button Code
+            //Cuts the GCODE file to have the initialization, base layer, and the end portion
+            //Will immediately start once the okay button is clicked
             if (base_radiobutton.Checked == true)
             {
                 //Patterns to Find in Code
@@ -32,139 +34,20 @@ namespace G_CODE_Generator
                 //Make sure that in the GCode file for the CAD part, ender ";END CODE" before the last G92 E0
 
                 // Make sure any "\" become "\\"
-                string base_gcode = "C:\\Users\\datta\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\GCode\\10mmCube.gcode";  //Complete GCODE file for the part
-                string copy_gcode = "C:\\Users\\datta\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\GCode\\~01BaseLayer.GCODE";        //Creates file or adds on to existing file
-                
-                string line;        //Variable for current line of text read
-                int find1 = 0;      //Varible to note when pattern has been found
+                string base_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\visual_studio_test2.GCODE";             //Complete GCODE file for the part
+                string copy_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\~Base2.GCODE";        //Creates file or adds on to existing file
 
                 //FINDS 1ST PHRASE AND WRITES NEW TEXT FILE FROM START TO LINE WHERE THE PHRASE IS FOUND
                 //          Does both reading and writing at the same time up to pattern 1
-                try
-                {
-                    //Pass the file path and file name to the StreamReader constructor and StreamWriter constructor
-                    StreamReader sr = new StreamReader(base_gcode);
-                    StreamWriter sw = new StreamWriter(copy_gcode, true, Encoding.ASCII);
-                    //Read the first line of text
-                    line = sr.ReadLine();
-                    //Continue to read until you reach end of file or when the 1st pattern has been found
-                    while (find1 == 0 && line != null)
-                    {
-                        //Search for pattern in current line
-                        Match m_code = Regex.Match(line, pattern1, RegexOptions.IgnoreCase);
-                        if (m_code.Success)
-                        {
-                            //this.output_text.Text += "Found " + m_code.Value + "\r\n";
-                            //Can add: at m_code.Index
-                            find1 = 1;
-                            sw.WriteLine(line);
-                        }
-                        else
-                        {
-                            sw.WriteLine(line);
-                        }
-                        //Display the line to output text box (debugging only)
-                        //this.output_text.Text += line + "\r\n";
-
-                        //Read the next line
-                        line = sr.ReadLine();
-                    }
-
-                    //close the file
-                    sr.Close();
-                    sw.Close();
-                    Console.ReadLine();
-                }
-                finally
-                {
-                    this.GCodeOutputText.Text += "Search and Write Complete. \r\n";
-
-                    //If not successful, will output this phrase (and the whole text file will be copied to the new one)
-                    if (find1 == 0)
-                    {
-                        this.GCodeOutputText.Text += "Phrase not found in text. \r\n";
-                    }
-                }
+                //          Calls function to copy the first part of code
+                Copy_Initialization(pattern1, base_gcode, copy_gcode);
 
 
                 //FIND AND WRITE ENDING PORTION OF THE CODE (FINDS 2ND PATTERN)
                 //          Reads the whole file to find the last instance of pattern and then writes from line containing pattern to the end of the file
-                int find2 = 0;          //Keeps track of if the pattern is found in the text file
-                int countLine = 0;      //Counts line numbers to keep track of where the patterns are found
-                int lastLine = 0;       //For finding the last instance of the 2nd pattern
-                try
-                {
-                    //Pass the file path and file name to the StreamReader constructor
-                    StreamReader sr = new StreamReader(base_gcode);
-                    //Read the first line of text
-                    line = sr.ReadLine();
-                    //Continue to read until you reach end of file
-                    while (line != null)
-                    {
-                        countLine += 1;
-                        //Search for pattern in current line
-                        Match m_code = Regex.Match(line, pattern2, RegexOptions.IgnoreCase);
-                        if (m_code.Success)
-                        {
-                            //this.output_text.Text += "Found " + m_code.Value + " at line " + countLine + "\r\n";
-                            find2 += 1;
-                            lastLine = countLine;       //Will note the line number of the last instance of the pattern
+                //          Calls function to copy last part of code
+                Copy_End(pattern2, base_gcode, copy_gcode);
 
-                        }
-                        //Read the next line
-                        line = sr.ReadLine();
-                    }
-                    //close the file
-                    sr.Close();
-                    Console.ReadLine();
-                }
-                finally
-                {
-                    this.GCodeOutputText.Text += "Search Complete. \r\n";
-
-                    //If the phrase is not found, will output this and will not do the next writing section to the text file
-                    if (find2 == 0)
-                    {
-                        this.GCodeOutputText.Text += "Phrase not found in text. \r\n";
-                    }
-                }
-
-                //Will complete only if the 2nd phrase was found
-                if (find2 > 0)
-                {
-                    int count = 0;
-                    try
-                    {
-                        //Pass the file path and file name to the StreamReader and StreamWriter constructor
-                        StreamReader sr = new StreamReader(base_gcode);
-                        StreamWriter sw = new StreamWriter(copy_gcode, true, Encoding.ASCII);
-                        //Read the first line of text
-                        line = sr.ReadLine();
-
-                        //Reads to the line before the second pattern
-                        while (count < (lastLine - 2))
-                        {
-                            count += 1;
-                            line = sr.ReadLine();
-                        }
-
-                        //Starts writing from selected line to the end of the text file
-                        while (line != null)
-                        {
-                            line = sr.ReadLine();
-                            sw.WriteLine(line);
-
-                        }
-                        //close the file
-                        sr.Close();
-                        sw.Close();
-                        Console.ReadLine();
-                    }
-                    finally
-                    {
-                        this.GCodeOutputText.Text += "Write Complete. \r\n";
-                    }
-                }
             }
             //End of BASE Button Code
 
@@ -297,10 +180,262 @@ namespace G_CODE_Generator
             }
             //End of SILVER LINES Button Code
 
-            
+
+            //VOIDS Button Code
+            if (void_radiobutton.Checked == true)
+            {
+                //Patterns to Find in Code
+                string void_pattern1 = @"END INITIALIZATION";
+                string void_pattern2 = @"Z:3.2";
+                string void_pattern3 = @"Z:5";
+                string void_pattern4 = @"END CODE";
+                //Make sure that in the GCode file for the CAD part, ender ";END CODE" before the last G92 E0
+
+                // Make sure any "\" become "\\"
+                string base_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\visual_studio_test2.GCODE";             //Complete GCODE file for the part
+                string copy_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\~Void1.GCODE";        //Creates file or adds on to existing file
+
+                Copy_Initialization(void_pattern1, base_gcode, copy_gcode);
+
+
+                //CODE TO FIND THE MIDDLE SECTION OF CODE ONLY
+                string line;
+                int find2 = 0;          //Keeps track of if the pattern is found in the text file
+                int find3 = 0;
+                int countLine = 0;      //Counts line numbers to keep track of where the patterns are found
+                int pattern2_Line = 0;       //For finding the last instance of the 2nd pattern
+                int pattern3_Line = 0;
+                try
+                {
+                    //Pass the file path and file name to the StreamReader constructor
+                    StreamReader sr = new StreamReader(base_gcode);
+                    //Read the first line of text
+                    line = sr.ReadLine();
+                    //Continue to read until you reach end of file
+                    while (line != null)
+                    {
+                        countLine += 1;
+                        //Search for 2nd pattern in current line
+                        Match m_code = Regex.Match(line, void_pattern2, RegexOptions.IgnoreCase);
+                        if (m_code.Success)
+                        {
+                            //this.output_text.Text += "Found " + m_code.Value + " at line " + countLine + "\r\n";
+                            find2 += 1;
+                            pattern2_Line = countLine;       //Will note the line number of the last instance of the pattern
+
+                        }
+
+                        //Search for 3rd pattern in current line
+                        Match p_code = Regex.Match(line, void_pattern3, RegexOptions.IgnoreCase);
+                        if (p_code.Success)
+                        {
+                            //this.output_text.Text += "Found " + m_code.Value + " at line " + countLine + "\r\n";
+                            find3 += 1;
+                            pattern3_Line = countLine;       //Will note the line number of the last instance of the pattern
+
+                        }
+
+                        //Read the next line
+                        line = sr.ReadLine();
+                    }
+                    //close the file
+                    sr.Close();
+                    Console.ReadLine();
+                }
+                finally
+                {
+                    this.GCodeOutputText.Text += "Search Complete. \r\n";
+
+                    //If the phrase is not found, will output this and will not do the next writing section to the text file
+                    if (find2 == 0)
+                    {
+                        this.GCodeOutputText.Text += "1st Phrase not found in text. \r\n";
+                    }
+                    if (find3 == 0)
+                    {
+                        this.GCodeOutputText.Text += "2st Phrase not found in text. \r\n";
+                    }
+                }
+
+                //Will complete only if the 2nd and 3rd phrases was found
+                if (find2 > 0 && find3 > 0)
+                {
+                    int count = 0;
+                    try
+                    {
+                        //Pass the file path and file name to the StreamReader and StreamWriter constructor
+                        StreamReader sr = new StreamReader(base_gcode);
+                        StreamWriter sw = new StreamWriter(copy_gcode, true, Encoding.ASCII);
+                        //Read the first line of text
+                        line = sr.ReadLine();
+
+                        //Reads to the line before the second pattern
+                        while (count < (pattern2_Line - 2))
+                        {
+                            count += 1;
+                            line = sr.ReadLine();
+                        }
+
+                        //Starts writing from selected line to the end of the text file
+                        while (line != null && count < (pattern3_Line - 1))
+                        {
+                            count += 1;
+                            line = sr.ReadLine();
+                            sw.WriteLine(line);
+
+                        }
+
+                        //close the file
+                        sr.Close();
+                        sw.Close();
+                        Console.ReadLine();
+                    }
+                    finally
+                    {
+                        this.GCodeOutputText.Text += "Write Complete. \r\n";
+                    }
+
+                    Copy_End(void_pattern4, base_gcode, copy_gcode);
+                }
+            }
+
+
         }
 
+        //FUNCTIONS
         //Enter your code for BASE Radio Button here
+        void Copy_Initialization(string pattern, string base_gcode, string copy_gcode)
+        {
+            string line;        //Variable for current line of text read
+            int find1 = 0;      //Varible to note when pattern has been found
+
+            try
+            {
+                //Pass the file path and file name to the StreamReader constructor and StreamWriter constructor
+                StreamReader sr = new StreamReader(base_gcode);
+                StreamWriter sw = new StreamWriter(copy_gcode, true, Encoding.ASCII);
+                //Read the first line of text
+                line = sr.ReadLine();
+                //Continue to read until you reach end of file or when the 1st pattern has been found
+                while (find1 == 0 && line != null)
+                {
+                    //Search for pattern in current line
+                    Match m_code = Regex.Match(line, pattern, RegexOptions.IgnoreCase);
+                    if (m_code.Success)
+                    {
+                        //this.output_text.Text += "Found " + m_code.Value + "\r\n";
+                        //Can add: at m_code.Index
+                        find1 = 1;
+                        sw.WriteLine(line);
+                    }
+                    else
+                    {
+                        sw.WriteLine(line);
+                    }
+                    //Display the line to output text box (debugging only)
+                    //this.output_text.Text += line + "\r\n";
+
+                    //Read the next line
+                    line = sr.ReadLine();
+                }
+
+                //close the file
+                sr.Close();
+                sw.Close();
+                Console.ReadLine();
+            }
+            finally
+            {
+                this.GCodeOutputText.Text += "Search and Write Complete. \r\n";
+
+                //If not successful, will output this phrase (and the whole text file will be copied to the new one)
+                if (find1 == 0)
+                {
+                    this.GCodeOutputText.Text += "Phrase not found in text. \r\n";
+                }
+            }
+        }
+
+        void Copy_End(string pattern, string base_gcode, string copy_gcode)
+        {
+            string line;
+            int find2 = 0;          //Keeps track of if the pattern is found in the text file
+            int countLine = 0;      //Counts line numbers to keep track of where the patterns are found
+            int lastLine = 0;       //For finding the last instance of the 2nd pattern
+            try
+            {
+                //Pass the file path and file name to the StreamReader constructor
+                StreamReader sr = new StreamReader(base_gcode);
+                //Read the first line of text
+                line = sr.ReadLine();
+                //Continue to read until you reach end of file
+                while (line != null)
+                {
+                    countLine += 1;
+                    //Search for pattern in current line
+                    Match m_code = Regex.Match(line, pattern, RegexOptions.IgnoreCase);
+                    if (m_code.Success)
+                    {
+                        //this.output_text.Text += "Found " + m_code.Value + " at line " + countLine + "\r\n";
+                        find2 += 1;
+                        lastLine = countLine;       //Will note the line number of the last instance of the pattern
+
+                    }
+                    //Read the next line
+                    line = sr.ReadLine();
+                }
+                //close the file
+                sr.Close();
+                Console.ReadLine();
+            }
+            finally
+            {
+                this.GCodeOutputText.Text += "Search Complete. \r\n";
+
+                //If the phrase is not found, will output this and will not do the next writing section to the text file
+                if (find2 == 0)
+                {
+                    this.GCodeOutputText.Text += "Phrase not found in text. \r\n";
+                }
+            }
+
+            //Will complete only if the 2nd phrase was found
+            if (find2 > 0)
+            {
+                int count = 0;
+                try
+                {
+                    //Pass the file path and file name to the StreamReader and StreamWriter constructor
+                    StreamReader sr = new StreamReader(base_gcode);
+                    StreamWriter sw = new StreamWriter(copy_gcode, true, Encoding.ASCII);
+                    //Read the first line of text
+                    line = sr.ReadLine();
+
+                    //Reads to the line before the second pattern
+                    while (count < (lastLine - 2))
+                    {
+                        count += 1;
+                        line = sr.ReadLine();
+                    }
+
+                    //Starts writing from selected line to the end of the text file
+                    while (line != null)
+                    {
+                        line = sr.ReadLine();
+                        sw.WriteLine(line);
+
+                    }
+                    //close the file
+                    sr.Close();
+                    sw.Close();
+                    Console.ReadLine();
+                }
+                finally
+                {
+                    this.GCodeOutputText.Text += "Write Complete. \r\n";
+                }
+            }
+        }
 
 
 
