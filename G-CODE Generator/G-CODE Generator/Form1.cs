@@ -34,8 +34,8 @@ namespace G_CODE_Generator
                 //Make sure that in the GCode file for the CAD part, ender ";END CODE" before the last G92 E0
 
                 // Make sure any "\" become "\\"
-                string base_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\visual_studio_test2.GCODE";             //Complete GCODE file for the part
-                string copy_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\~Base2.GCODE";        //Creates file or adds on to existing file
+                string base_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\visual_studio_test2.GCODE";    //Complete GCODE file for the part
+                string copy_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\~Base2.GCODE";     //Creates file or adds on to existing file
 
                 //FINDS 1ST PHRASE AND WRITES NEW TEXT FILE FROM START TO LINE WHERE THE PHRASE IS FOUND
                 //          Does both reading and writing at the same time up to pattern 1
@@ -185,10 +185,10 @@ namespace G_CODE_Generator
             if (void_radiobutton.Checked == true)
             {
                 //Patterns to Find in Code
-                string void_pattern1 = @"END INITIALIZATION";
-                string void_pattern2 = @"Z:3.2";
-                string void_pattern3 = @"Z:5";
-                string void_pattern4 = @"END CODE";
+                string void_pattern1 = @"END INITIALIZATION";       //First pattern (end of initialization)
+                string void_pattern2 = @"Z:3.2";                    //Second pattern (begining of void section)
+                string void_pattern3 = @"Z:5";                      //Third pattern (end of void section)
+                string void_pattern4 = @"END CODE";                 //Last pattern (start of final section of the code)
                 //Make sure that in the GCode file for the CAD part, ender ";END CODE" before the last G92 E0
 
                 // Make sure any "\" become "\\"
@@ -197,14 +197,13 @@ namespace G_CODE_Generator
 
                 Copy_Initialization(void_pattern1, base_gcode, copy_gcode);
 
-
                 //CODE TO FIND THE MIDDLE SECTION OF CODE ONLY
                 string line;
-                int find2 = 0;          //Keeps track of if the pattern is found in the text file
-                int find3 = 0;
+                int find2 = 0;          //Keeps track of if the second pattern is found in the text (finding the BEGINING of the void section)
+                int find3 = 0;          //Keeps track of if the third pattern is found in the text (finding the END of the void section)
                 int countLine = 0;      //Counts line numbers to keep track of where the patterns are found
                 int pattern2_Line = 0;       //For finding the last instance of the 2nd pattern
-                int pattern3_Line = 0;
+                int pattern3_Line = 0;       //For finding the instance of the 3rd pattern
                 try
                 {
                     //Pass the file path and file name to the StreamReader constructor
@@ -244,9 +243,9 @@ namespace G_CODE_Generator
                 }
                 finally
                 {
-                    this.GCodeOutputText.Text += "Search Complete. \r\n";
+                    this.GCodeOutputText.Text += "Void Section: Search Complete. \r\n";
 
-                    //If the phrase is not found, will output this and will not do the next writing section to the text file
+                    //If either phrase is not found, will output this and will not do the next writing section to the text file
                     if (find2 == 0)
                     {
                         this.GCodeOutputText.Text += "1st Phrase not found in text. \r\n";
@@ -276,7 +275,7 @@ namespace G_CODE_Generator
                             line = sr.ReadLine();
                         }
 
-                        //Starts writing from selected line to the end of the text file
+                        //Starts writing from the 2nd pattern to 3rd pattern
                         while (line != null && count < (pattern3_Line - 1))
                         {
                             count += 1;
@@ -292,7 +291,7 @@ namespace G_CODE_Generator
                     }
                     finally
                     {
-                        this.GCodeOutputText.Text += "Write Complete. \r\n";
+                        this.GCodeOutputText.Text += "Void Section: Write Complete. \r\n";
                     }
 
                     Copy_End(void_pattern4, base_gcode, copy_gcode);
@@ -303,9 +302,13 @@ namespace G_CODE_Generator
         }
 
         //FUNCTIONS
+
         //Enter your code for BASE Radio Button here
         void Copy_Initialization(string pattern, string base_gcode, string copy_gcode)
         {
+            //This function reads and copies from the begining of a gcode file to a specified text pattern found within the file
+            //Used for both BASE and VOID radio button
+
             string line;        //Variable for current line of text read
             int find1 = 0;      //Varible to note when pattern has been found
 
@@ -325,6 +328,7 @@ namespace G_CODE_Generator
                     {
                         //this.output_text.Text += "Found " + m_code.Value + "\r\n";
                         //Can add: at m_code.Index
+
                         find1 = 1;
                         sw.WriteLine(line);
                     }
@@ -346,7 +350,7 @@ namespace G_CODE_Generator
             }
             finally
             {
-                this.GCodeOutputText.Text += "Search and Write Complete. \r\n";
+                this.GCodeOutputText.Text += "First Section: Search and Write Complete. \r\n";
 
                 //If not successful, will output this phrase (and the whole text file will be copied to the new one)
                 if (find1 == 0)
@@ -358,6 +362,9 @@ namespace G_CODE_Generator
 
         void Copy_End(string pattern, string base_gcode, string copy_gcode)
         {
+            //This function reads and copies code from a specified pattern (last instance) to the end of the gcode text file
+            //Used for BASE and VOIDS
+
             string line;
             int find2 = 0;          //Keeps track of if the pattern is found in the text file
             int countLine = 0;      //Counts line numbers to keep track of where the patterns are found
@@ -377,6 +384,7 @@ namespace G_CODE_Generator
                     if (m_code.Success)
                     {
                         //this.output_text.Text += "Found " + m_code.Value + " at line " + countLine + "\r\n";
+
                         find2 += 1;
                         lastLine = countLine;       //Will note the line number of the last instance of the pattern
 
@@ -390,7 +398,7 @@ namespace G_CODE_Generator
             }
             finally
             {
-                this.GCodeOutputText.Text += "Search Complete. \r\n";
+                this.GCodeOutputText.Text += "End Section: Search Complete. \r\n";
 
                 //If the phrase is not found, will output this and will not do the next writing section to the text file
                 if (find2 == 0)
@@ -399,7 +407,7 @@ namespace G_CODE_Generator
                 }
             }
 
-            //Will complete only if the 2nd phrase was found
+            //Will complete only if the phrase was found
             if (find2 > 0)
             {
                 int count = 0;
@@ -411,7 +419,7 @@ namespace G_CODE_Generator
                     //Read the first line of text
                     line = sr.ReadLine();
 
-                    //Reads to the line before the second pattern
+                    //Reads to the line before the pattern
                     while (count < (lastLine - 2))
                     {
                         count += 1;
@@ -432,7 +440,7 @@ namespace G_CODE_Generator
                 }
                 finally
                 {
-                    this.GCodeOutputText.Text += "Write Complete. \r\n";
+                    this.GCodeOutputText.Text += "End Section: Write Complete. \r\n";
                 }
             }
         }
@@ -712,13 +720,6 @@ namespace G_CODE_Generator
 
         //Enter your code for TOP LAYER Radio Button here
 
-        
-
-
-
-
-
-
-
+       
     }
 }
