@@ -23,6 +23,11 @@ namespace G_CODE_Generator
 
         private void button_generate_Click(object sender, EventArgs e)
         {
+            //File Paths for Copy Code
+            // Make sure any "\" become "\\"
+            string base_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\visual_studio_test2.GCODE";    //Complete GCODE file for the part
+            string copy_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\~Base1.GCODE";     //Creates file or adds on to existing file
+
             //BASE Radio Button Code
             //Cuts the GCODE file to have the initialization, base layer, and the end portion
             //Will immediately start once the okay button is clicked
@@ -32,10 +37,6 @@ namespace G_CODE_Generator
                 string pattern1 = @"Z:3.2";     //Will only find the first instance of pattern
                 string pattern2 = @"END CODE";  //Will only find last instance of pattern
                 //Make sure that in the GCode file for the CAD part, ender ";END CODE" before the last G92 E0
-
-                // Make sure any "\" become "\\"
-                string base_gcode = "C:\\Users\\Datta\\OneDrive\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\GCode\\10mmCube.gcode";    //Complete GCODE file for the part
-                string copy_gcode = "C:\\Users\\Datta\\OneDrive\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\GCode\\~Base1.GCODE";     //Creates file or adds on to existing file
 
                 //FINDS 1ST PHRASE AND WRITES NEW TEXT FILE FROM START TO LINE WHERE THE PHRASE IS FOUND
                 //          Does both reading and writing at the same time up to pattern 1
@@ -53,8 +54,6 @@ namespace G_CODE_Generator
 
 
             //SILVER LINES Radio Button Code
-            
-
             if (silver_radiobutton.Checked == true)
             {
                 Initialization_Silver(); //Output the GCODE that sets the printer and printer head for silver extrusion 
@@ -73,10 +72,6 @@ namespace G_CODE_Generator
                 string void_pattern3 = @"Z:5";                      //Third pattern (end of void section)
                 string void_pattern4 = @"END CODE";                 //Last pattern (start of final section of the code)
                 //Make sure that in the GCode file for the CAD part, ender ";END CODE" before the last G92 E0
-
-                // Make sure any "\" become "\\"
-                string base_gcode = "C:\\Users\\Datta\\OneDrive\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\GCode\\10mmCube.gcode";             //Complete GCODE file for the part
-                string copy_gcode = "C:\\Users\\Datta\\OneDrive\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\GCode\\~Void1.GCODE";        //Creates file or adds on to existing file
 
                 Copy_Initialization(void_pattern1, base_gcode, copy_gcode);
 
@@ -126,16 +121,21 @@ namespace G_CODE_Generator
                 }
                 finally
                 {
-                    this.GCodeOutputText.Text += "Void Section: Search Complete. \r\n";
-
-                    //If either phrase is not found, will output this and will not do the next writing section to the text file
-                    if (find2 == 0)
+                    if (find2 > 0 || find3 > 0)
                     {
-                        this.GCodeOutputText.Text += "1st Phrase not found in text. \r\n";
+                        this.GCodeOutputText.Text += "Void Section: Search Complete. \r\n";
                     }
-                    if (find3 == 0)
+                    else
                     {
-                        this.GCodeOutputText.Text += "2st Phrase not found in text. \r\n";
+                        //If either phrase is not found, will output this and will not do the next writing section to the text file
+                        if (find2 == 0)
+                        {
+                            this.GCodeOutputText.Text += "1st Phrase not found in text. \r\n";
+                        }
+                        if (find3 == 0)
+                        {
+                            this.GCodeOutputText.Text += "2st Phrase not found in text. \r\n";
+                        }
                     }
                 }
 
@@ -188,10 +188,6 @@ namespace G_CODE_Generator
                 string top_pattern1 = @"END INITIALIZATION";       //First pattern (end of initialization)
                 string top_pattern2 = @"Z:5";                    //Second pattern (begining of final section- top and end sections)
 
-                // Make sure any "\" become "\\"
-                string base_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\visual_studio_test2.GCODE";             //Complete GCODE file for the part
-                string copy_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\~Top1.GCODE";        //Creates file or adds on to existing file
-
                 //Calls function to copy initialization section of gcode (up to pattern 1)
                 Copy_Initialization(top_pattern1, base_gcode, copy_gcode);
 
@@ -213,14 +209,16 @@ namespace G_CODE_Generator
 
             string line;        //Variable for current line of text read
             int find1 = 0;      //Varible to note when pattern has been found
+            int countLine = 0;
+            int count = 0;
 
             try
             {
                 //Pass the file path and file name to the StreamReader constructor and StreamWriter constructor
                 StreamReader sr = new StreamReader(base_gcode);
-                StreamWriter sw = new StreamWriter(copy_gcode, true, Encoding.ASCII);
                 //Read the first line of text
                 line = sr.ReadLine();
+                countLine += 1;
                 //Continue to read until you reach end of file or when the 1st pattern has been found
                 while (find1 == 0 && line != null)
                 {
@@ -232,34 +230,65 @@ namespace G_CODE_Generator
                         //Can add: at m_code.Index
 
                         find1 = 1;
-                        sw.WriteLine(line);
-                    }
-                    else
-                    {
-                        sw.WriteLine(line);
                     }
                     //Display the line to output text box (debugging only)
                     //this.output_text.Text += line + "\r\n";
 
                     //Read the next line
                     line = sr.ReadLine();
+                    countLine += 1;
                 }
 
                 //close the file
                 sr.Close();
-                sw.Close();
                 Console.ReadLine();
             }
             finally
             {
-                this.GCodeOutputText.Text += "First Section: Search and Write Complete. \r\n";
-
-                //If not successful, will output this phrase (and the whole text file will be copied to the new one)
-                if (find1 == 0)
+                if (find1 > 0)
                 {
+                    this.GCodeOutputText.Text += "First Section: Search Complete. \r\n";
+                }
+                else
+                {
+                    //If not successful, will output this phrase (and the whole text file will be copied to the new one)
                     this.GCodeOutputText.Text += "Phrase not found in text. \r\n";
                 }
+                
             }
+
+            if (find1 > 0)
+            {
+                try
+                {
+                    //Pass the file path and file name to the StreamReader constructor and StreamWriter constructor
+                    StreamReader sr = new StreamReader(base_gcode);
+                    StreamWriter sw = new StreamWriter(copy_gcode, true, Encoding.ASCII);
+                    //Read the first line of text
+                    line = sr.ReadLine();
+                    count += 1;
+                    //Continue to read until you reach end of file or when the 1st pattern has been found
+                    while (count <= (countLine - 1) && line != null)
+                    {
+                        sw.WriteLineAsync(line);
+
+                        //Read the next line
+                        line = sr.ReadLine();
+                        count += 1;
+                    }
+
+                    //close the file
+                    sr.Close();
+                    sw.Close();
+                    Console.ReadLine();
+                }
+                finally
+                {
+                    this.GCodeOutputText.Text += "First Section: Write Complete. \r\n";
+
+                }
+            }
+
         }
 
         void Copy_End(string pattern, string base_gcode, string copy_gcode)
@@ -300,12 +329,14 @@ namespace G_CODE_Generator
             }
             finally
             {
-                this.GCodeOutputText.Text += "End Section: Search Complete. \r\n";
-
                 //If the phrase is not found, will output this and will not do the next writing section to the text file
                 if (find2 == 0)
                 {
                     this.GCodeOutputText.Text += "Phrase not found in text. \r\n";
+                }
+                else
+                {
+                    this.GCodeOutputText.Text += "End Section: Search Complete. \r\n";
                 }
             }
 

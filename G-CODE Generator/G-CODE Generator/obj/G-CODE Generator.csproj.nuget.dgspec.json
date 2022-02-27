@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Datta\\OneDrive\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\G-CODE Generator\\G-CODE Generator.csproj": {}
+    "C:\\Users\\mossc\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\G-CODE Generator\\G-CODE Generator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Datta\\OneDrive\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\G-CODE Generator\\G-CODE Generator.csproj": {
+    "C:\\Users\\mossc\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\G-CODE Generator\\G-CODE Generator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Datta\\OneDrive\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\G-CODE Generator\\G-CODE Generator.csproj",
+        "projectUniqueName": "C:\\Users\\mossc\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\G-CODE Generator\\G-CODE Generator.csproj",
         "projectName": "G-CODE Generator",
-        "projectPath": "C:\\Users\\Datta\\OneDrive\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\G-CODE Generator\\G-CODE Generator.csproj",
-        "packagesPath": "C:\\Users\\Datta\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Datta\\OneDrive\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\G-CODE Generator\\obj\\",
+        "projectPath": "C:\\Users\\mossc\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\G-CODE Generator\\G-CODE Generator.csproj",
+        "packagesPath": "C:\\Users\\mossc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mossc\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\G-CODE Generator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Datta\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mossc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0-windows7.0"
