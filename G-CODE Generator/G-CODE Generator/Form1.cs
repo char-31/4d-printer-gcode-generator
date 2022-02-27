@@ -34,8 +34,8 @@ namespace G_CODE_Generator
                 //Make sure that in the GCode file for the CAD part, ender ";END CODE" before the last G92 E0
 
                 // Make sure any "\" become "\\"
-                string base_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\visual_studio_test2.GCODE";    //Complete GCODE file for the part
-                string copy_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\~Base2.GCODE";     //Creates file or adds on to existing file
+                string base_gcode = "C:\\Users\\Datta\\OneDrive\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\GCode\\10mmCube.gcode";    //Complete GCODE file for the part
+                string copy_gcode = "C:\\Users\\Datta\\OneDrive\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\GCode\\~Base1.GCODE";     //Creates file or adds on to existing file
 
                 //FINDS 1ST PHRASE AND WRITES NEW TEXT FILE FROM START TO LINE WHERE THE PHRASE IS FOUND
                 //          Does both reading and writing at the same time up to pattern 1
@@ -53,129 +53,12 @@ namespace G_CODE_Generator
 
 
             //SILVER LINES Radio Button Code
-            //This part of the code sets flags if each button is clicked
-            //The flags will be used in switch cases further in the program
-            decimal PartIncluded_Flag = 0;
-            if (PC_PartIncluded.Checked) PartIncluded_Flag = 1;
-            if (BC_PartIncluded.Checked) PartIncluded_Flag = 2;
-            if (WiFi_PartIncluded.Checked) PartIncluded_Flag = 3;
-            if (Pad_PartIncluded.Checked) PartIncluded_Flag = 4;
-            if (SG_PartIncluded.Checked) PartIncluded_Flag = 5;
+            
 
             if (silver_radiobutton.Checked == true)
             {
                 Initialization_Silver(); //Output the GCODE that sets the printer and printer head for silver extrusion 
-                switch (PartIncluded_Flag) //Checks which artifact is to be used so that it can print the footprint of said artifact
-                {
-                    case 1:
-                        //Case 1 ==> For printing the footprint of the DC power connector
-
-                        //Opens a picture of a suggested artifact's void dimensions
-                        //MAKE SURE THE FILE PATH OF THE IMAGE IS ENTERED HERE WHEN TRANSFERING THIS PROJECT'S FOLDER ACROSS COMPUTERS
-                        //Image to summon: PC_Void.png (GCodeGeneratorV8\Pictures)
-                        VoidSuggestion.ImageLocation = @"C:\Users\datta\Documents\GitHub\4d-printer-gcode-generator\G-CODE Generator\Pictures\PC_Void.png";
-
-                        this.GCodeOutputText.Text += ";The following section will print the footprint for a DC power connector using a liquid extruder\r\n";
-                        this.GCodeOutputText.Text += ";The printer will begin at the center of the GND pin and end at the center of the live pad\r\n";
-                        this.GCodeOutputText.Text += ";Each pad is of the size 5x5 mm and are intended to fit inside the suggested void dimensions (TAKEN FROM GCODEGENERATOR)\r\n\r\n";
-
-                        Print_SquarePad(5); //Prints the ground pad
-
-                        //Moves to the next pad
-                        this.GCodeOutputText.Text += ";\r\n";
-                        this.GCodeOutputText.Text += "G0 Z4 F400\r\n";
-                        this.GCodeOutputText.Text += "G0 Y15 F400\r\n";
-                        this.GCodeOutputText.Text += "G0 Z-4 F400\r\n";
-                        this.GCodeOutputText.Text += ";\r\n";
-
-                        Print_SquarePad(5); //Prints the shunt pad
-
-                        //Moves to the final third pad
-                        this.GCodeOutputText.Text += ";\r\n";
-                        this.GCodeOutputText.Text += "G0 Z4 F400\r\n";
-                        this.GCodeOutputText.Text += "G0 X-9 Y-10 F400\r\n";
-                        this.GCodeOutputText.Text += "G0 Z-4 F400\r\n";
-                        this.GCodeOutputText.Text += ";\r\n";
-
-                        Print_SquarePad(5); //Prints the live pad
-
-                        break;
-                    case 2:
-                        //Case 2 ==> For printing the footprint of the button cell
-
-                        this.GCodeOutputText.Text += "TO BE ADDED\r\n";
-                        break;
-                    case 3:
-                        //Case 3 ==> For printing the footprint of the ESP8285 Wifi Module
-                        //This section will print 4 pins: VCC, GND, IO2 for remotely controlling one pin, and ADC for reading voltage
-
-                        //Opens a picture of a suggested artifact's void dimensions
-                        //MAKE SURE THE FILE PATH OF THE IMAGE IS ENTERED HERE WHEN TRANSFERING THIS PROJECT'S FOLDER ACROSS COMPUTERS
-                        //Image to summon: WiFi_Void.png (GCodeGeneratorV8\Pictures)
-                        VoidSuggestion.ImageLocation = @"C:\Users\datta\Documents\GitHub\4d-printer-gcode-generator\G-CODE Generator\Pictures\WiFi_Void.png";
-
-                        this.GCodeOutputText.Text += ";The following section will print the footprint for an ESP 8285 WiFi Module using a liquid extruder\r\n";
-                        this.GCodeOutputText.Text += ";The printer will print traces connecting to the VCC, GND, ADC, and IO2 pins\r\n";
-                        this.GCodeOutputText.Text += ";The printer will begin at the beginning of the ADC pin facing the module, print the VCC pin, GND pin, and finally the IO2 pin, ending under the WiFi module\r\n";
-                        this.GCodeOutputText.Text += ";These traces are intended to fit inside the suggested void dimensions (TAKEN FROM GCODEGENERATOR)\r\n";
-
-                        //Prints the trace that connects to the ADC pin
-                        this.GCodeOutputText.Text += ";Printing the ADC pin\r\n";
-                        this.GCodeOutputText.Text += "G1 X8 E1 F400\r\n";
-                        this.GCodeOutputText.Text += "G1 X-8 E1 F400\r\n";
-                        this.GCodeOutputText.Text += "G1 X8 E1 F400\r\n";
-
-                        //Moves to the next pin
-                        this.GCodeOutputText.Text += ";\r\n";
-                        this.GCodeOutputText.Text += "G0 Z4 F400\r\n";
-                        this.GCodeOutputText.Text += "G0 Y9 F400\r\n";
-                        this.GCodeOutputText.Text += "G0 Z-4 F400\r\n";
-                        this.GCodeOutputText.Text += ";\r\n";
-
-                        //Prints the trace that connects to the VCC pin
-                        this.GCodeOutputText.Text += ";Printing the VCC pin\r\n";
-                        this.GCodeOutputText.Text += "G1 X-8 E1 F400\r\n";
-                        this.GCodeOutputText.Text += "G1 X8 E1 F400\r\n";
-                        this.GCodeOutputText.Text += "G1 X-8 E1 F400\r\n";
-
-                        //Moves to the next pin
-                        this.GCodeOutputText.Text += ";\r\n";
-                        this.GCodeOutputText.Text += "G0 Z4 F400\r\n";
-                        this.GCodeOutputText.Text += "G0 X-4.5 F400\r\n";
-                        this.GCodeOutputText.Text += "G0 Z-4 F400\r\n";
-                        this.GCodeOutputText.Text += ";\r\n";
-
-                        //Prints the trace that connects to the GND pin
-                        this.GCodeOutputText.Text += ";Printing the GND Pin\r\n";
-                        this.GCodeOutputText.Text += "G1 X-6 E1 F400\r\n";
-                        this.GCodeOutputText.Text += "G1 X6 E1 F400\r\n";
-                        this.GCodeOutputText.Text += "G1 X-6 E1 F400\r\n";
-
-                        //Moves to the next pin
-                        this.GCodeOutputText.Text += ";\r\n";
-                        this.GCodeOutputText.Text += "G0 Z4 F400\r\n";
-                        this.GCodeOutputText.Text += "G0 Y-1.5 F400\r\n";
-                        this.GCodeOutputText.Text += "G0 Z-4 F400\r\n";
-                        this.GCodeOutputText.Text += ";\r\n";
-
-                        //Prints the trace that connects to the IO2 pin
-                        this.GCodeOutputText.Text += ";Printing the IO2 Pin\r\n";
-                        this.GCodeOutputText.Text += "G1 X6 E1 F400\r\n";
-                        this.GCodeOutputText.Text += "G1 X-6 E1 F400\r\n";
-                        this.GCodeOutputText.Text += "G1 X6 E1 F400\r\n";
-
-                        break;
-                    case 4:
-                        //Case 4 ==> For printing a pad of any known side length
-
-                        Print_SquarePad(PadSize_Side.Value);
-                        break;
-                    case 5:
-                        //Case 5 ==> For printing a strain gauge of any known length and width
-
-                        Print_StrainGauge(StrainGaugeLength_X.Value, StrainGaugeWidth_Y.Value);
-                        break;
-                }
+                Print_Element();
                 End();
             }
             //End of SILVER LINES Button Code
@@ -192,8 +75,8 @@ namespace G_CODE_Generator
                 //Make sure that in the GCode file for the CAD part, ender ";END CODE" before the last G92 E0
 
                 // Make sure any "\" become "\\"
-                string base_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\visual_studio_test2.GCODE";             //Complete GCODE file for the part
-                string copy_gcode = "C:\\Users\\mossc\\Documents\\4D Print RESEARCH\\~Void1.GCODE";        //Creates file or adds on to existing file
+                string base_gcode = "C:\\Users\\Datta\\OneDrive\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\GCode\\10mmCube.gcode";             //Complete GCODE file for the part
+                string copy_gcode = "C:\\Users\\Datta\\OneDrive\\Documents\\GitHub\\4d-printer-gcode-generator\\G-CODE Generator\\GCode\\~Void1.GCODE";        //Creates file or adds on to existing file
 
                 Copy_Initialization(void_pattern1, base_gcode, copy_gcode);
 
@@ -322,7 +205,7 @@ namespace G_CODE_Generator
 
         //FUNCTIONS
 
-        //Enter your code for BASE Radio Button here
+        //Enter your functions for BASE Radio Button here
         void Copy_Initialization(string pattern, string base_gcode, string copy_gcode)
         {
             //This function reads and copies from the begining of a gcode file to a specified text pattern found within the file
@@ -466,7 +349,7 @@ namespace G_CODE_Generator
 
 
 
-        //Enter your code for SILVER LINES Radio Button here
+        //Enter your functions for SILVER LINES Radio Button here
         void Initialization_Silver()
         {
             //This function adds the printer settings for silver printing
@@ -625,10 +508,10 @@ namespace G_CODE_Generator
             }
         }
 
-        void Print_StrainGauge(decimal SGLength, decimal SGWidth)
+        void Print_StrainGauge(decimal SGLength, decimal SGWidth, decimal SGRotation)
         {
-            //This function will print a strain gauge of any known length and width, connected to 10 mm leads and 5x5 mm contact pads
-            //This function will begin at the top right corner of a 5x5 mm pad, print it, 10 mm lead, the first trace of the SG, a 2x3 mm pad, then another trace moving downwards
+            //This function will print a strain gauge of any known length and width, connected to 10 mm leads and 5x5 mm contact pads, and will rotate the entire structure given the desired degrees
+            //This function will begin at the top right corner of a 5x5 mm pad, print it, 10 mm lead from its center, the first trace of the SG, a 2x3 mm pad, then another trace moving downwards
             //From this point, the function will repeat a pattern (pad, up, pad, down) and will make sure that it stays under the desired length
             //Before printing this pattern, it will check whether printing it will overshoot the length
             //If overshooting will occur, the function will print a 10 mm trace and a 5x5 mm contact pad and end in the bottom left corner of that pad
@@ -637,94 +520,511 @@ namespace G_CODE_Generator
             this.GCodeOutputText.Text += ";The strain gauge will be connected to 10 mm traces, which will be connected to the center of 5x5 mm pads\r\n";
             this.GCodeOutputText.Text += ";The strain gauge will start at the top right of the right contact pad and end at the bottom left of the left contact pad\r\n\r\n";
 
-            Print_Pad_KnownShape(5, 5); //Prints the first contact pad
-            this.GCodeOutputText.Text += "G1 X-2.5 Y-2.5 E1 F400\r\n"; //Moves to the center of the pad
-            this.GCodeOutputText.Text += ";\r\n";
-
-            //Drawing the 10 mm trace to connect the first contact pad to the strain gauge
-            decimal Contact_Distance = 10;
-            this.GCodeOutputText.Text += ";Print a 10 mm trace to connect with the strain gauge\r\n";
-            this.GCodeOutputText.Text += "G1 Y-" + Contact_Distance.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y" + Contact_Distance.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y-" + Contact_Distance.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y" + Contact_Distance.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y-" + Contact_Distance.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += ";\r\n";
-
-            decimal SGPadLength = 2;
-            decimal SGPadWidth = 3;
-
-            this.GCodeOutputText.Text += ";Print the strain gauge\r\n";
-            //Drawing the first trace of the strain gauge
-            this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += ";\r\n";
-
-            Print_Pad_KnownShape(SGPadLength, SGPadWidth); //Prints the first 2x3 mm pad in the strain gauge
-            this.GCodeOutputText.Text += ";\r\n";
-            this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y" + SGPadWidth.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += ";\r\n";
-
-            decimal DistanceToCover = SGLength - SGPadLength; //Used in the for loop to check how much distance is left to cover for printing the strain gauge's length
-            decimal DistanceCovered = SGPadLength; //Used to cover how much distance in the X direction is covered
-
-            for (int x = 0; x < DistanceToCover; x = x + (int)(SGPadLength * 2))
+            switch (SGRotation)
             {
-                if ((DistanceCovered + (SGPadLength * 2)) > SGLength)
-                    break; //Before printing, if it prints the pattern and overshoots, it will break from the for loop before printing the pattern
+                case 0:
+                    Print_Pad_KnownShape(5, 5); //Prints the first contact pad
+                    this.GCodeOutputText.Text += "G1 X-2.5 Y-2.5 E1 F400\r\n"; //Moves to the center of the pad
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    //Drawing the 10 mm trace to connect the first contact pad to the strain gauge
+                    decimal Contact_Distance = 10;
+                    this.GCodeOutputText.Text += ";Print a 10 mm trace to connect with the strain gauge\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    decimal SGPadLength = 2;
+                    decimal SGPadWidth = 3;
+
+                    this.GCodeOutputText.Text += ";Print the strain gauge\r\n";
+                    //Drawing the first trace of the strain gauge
+                    this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    Print_Pad_KnownShape(SGPadLength, SGPadWidth); //Prints the first 2x3 mm pad in the strain gauge
+                    this.GCodeOutputText.Text += "G1 Y-" + SGPadWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    decimal DistanceToCover = SGLength - SGPadLength; //Used in the for loop to check how much distance is left to cover for printing the strain gauge's length
+                    decimal DistanceCovered = SGPadLength; //Used to cover how much distance in the X direction is covered
+
+                    for (int x = 0; x < DistanceToCover; x = x + (int)(SGPadLength * 2))
+                    {
+                        if ((DistanceCovered + (SGPadLength * 2)) > SGLength)
+                            break; //Before printing, if it prints the pattern and overshoots, it will break from the for loop before printing the pattern
 
 
-                //This section will print the pattern: pad, up, pad, down
-                Print_Pad_KnownShape(SGPadLength, SGPadWidth); //Pad
-                this.GCodeOutputText.Text += ";\r\n"; //Up
-                this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
-                this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
-                this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
-                this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
-                this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
-                this.GCodeOutputText.Text += ";\r\n";
-                Print_Pad_KnownShape(SGPadLength, SGPadWidth); //Pad
-                this.GCodeOutputText.Text += ";\r\n"; //Down
-                this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
-                this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
-                this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
-                this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
-                this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
-                this.GCodeOutputText.Text += "G1 Y" + SGPadWidth.ToString() + "E1 F400\r\n";
-                this.GCodeOutputText.Text += ";\r\n";
+                        //This section will print the pattern: pad, up, pad, down
 
-                DistanceCovered += (int)(SGPadLength * 2); //Makes sure to record how much distance was covered to check in the beginning of the for loop
+                        this.GCodeOutputText.Text += "G1 Y-" + SGPadWidth.ToString() + "E1 F400\r\n";
+                        Print_Pad_KnownShape(SGPadLength, SGPadWidth); //Pad
+                        this.GCodeOutputText.Text += ";\r\n"; //Up
+                        this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += ";\r\n";
+                        Print_Pad_KnownShape(SGPadLength, SGPadWidth); //Pad
+                        this.GCodeOutputText.Text += "G1 Y-" + SGPadWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += ";\r\n"; //Down
+                        this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += ";\r\n";
+
+                        DistanceCovered += (int)(SGPadLength * 2); //Makes sure to record how much distance was covered to check in the beginning of the for loop
+                    }
+
+                    this.GCodeOutputText.Text += ";End the printing of the strain gauge\r\n;\r\n";
+
+                    //Prints the second 10 mm trace
+                    this.GCodeOutputText.Text += ";Print a 10 mm trace to connect with the left contact pad\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    decimal RemainingDistance = SGLength - DistanceCovered; //If any length is left but not covered because this function stopped early, then it will print a trace along the X axis to cover for that distance
+                    this.GCodeOutputText.Text += "G1 X" + RemainingDistance.ToString() + " E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-2.5 Y-2.5 E1 F400\r\n"; //Moves to print the final contact pad
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    Print_Pad_KnownShape(5, 5); //Prints the final 5x5 mm contact pad
+                    break;
+
+                case 45:
+
+                    break;
+
+                case 90:
+                    Print_Pad_KnownShape(5, 5); //Prints the first contact pad
+                    this.GCodeOutputText.Text += "G1 X-2.5 Y-2.5 E1 F400\r\n"; //Moves to the center of the pad
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    //Drawing the 10 mm trace to connect the first contact pad to the strain gauge
+                    Contact_Distance = 10;
+                    this.GCodeOutputText.Text += ";Print a 10 mm trace to connect with the strain gauge\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    SGPadLength = 3;
+                    SGPadWidth = 2;
+
+                    this.GCodeOutputText.Text += ";Print the strain gauge\r\n";
+                    //Drawing the first trace of the strain gauge
+                    this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    this.GCodeOutputText.Text += "G1 Y-" + SGPadWidth.ToString() + "E1 F400\r\n";
+                    Print_Pad_KnownShape(SGPadLength, SGPadWidth); //Prints the first 2x3 mm pad in the strain gauge
+                    this.GCodeOutputText.Text += "G1 X-" + SGPadLength.ToString() + " Y-" + SGPadWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    DistanceToCover = SGLength - SGPadLength; //Used in the for loop to check how much distance is left to cover for printing the strain gauge's length
+                    DistanceCovered = SGPadLength; //Used to cover how much distance in the X direction is covered
+
+                    for (int x = 0; x < DistanceToCover; x = x + (int)(SGPadLength * 2))
+                    {
+                        if ((DistanceCovered + (SGPadLength * 2)) > SGLength)
+                            break; //Before printing, if it prints the pattern and overshoots, it will break from the for loop before printing the pattern
+
+
+                        //This section will print the pattern: pad, up, pad, down
+                        this.GCodeOutputText.Text += "G1 X-" + SGPadLength.ToString() + " Y-" + SGPadWidth.ToString() + "E1 F400\r\n";
+                        Print_Pad_KnownShape(SGPadLength, SGPadWidth); //Pad
+                        this.GCodeOutputText.Text += "G1 Y-" + SGPadWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += ";\r\n"; //Up
+                        this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += ";\r\n";
+                        this.GCodeOutputText.Text += "G1 Y-" + SGPadWidth.ToString() + "E1 F400\r\n";
+                        Print_Pad_KnownShape(SGPadLength, SGPadWidth); //Prints the first 2x3 mm pad in the strain gauge
+                        this.GCodeOutputText.Text += "G1 X-" + SGPadLength.ToString() + " Y-" + SGPadWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += ";\r\n"; //Down
+                        this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += ";\r\n";
+
+                        DistanceCovered += (int)(SGPadLength * 2); //Makes sure to record how much distance was covered to check in the beginning of the for loop
+                    }
+
+                    this.GCodeOutputText.Text += ";End the printing of the strain gauge\r\n;\r\n";
+
+                    //Prints the second 10 mm trace
+                    this.GCodeOutputText.Text += ";Print a 10 mm trace to connect with the left contact pad\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    RemainingDistance = SGLength - DistanceCovered; //If any length is left but not covered because this function stopped early, then it will print a trace along the X axis to cover for that distance
+                    this.GCodeOutputText.Text += "G1 Y-" + RemainingDistance.ToString() + " E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-2.5 Y-2.5 E1 F400\r\n"; //Moves to print the final contact pad
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    Print_Pad_KnownShape(5, 5); //Prints the final 5x5 mm contact pad
+                    break;
+
+                case 135:
+
+                    break;
+
+                case 180:
+                    Print_Pad_KnownShape(5, 5); //Prints the first contact pad
+                    this.GCodeOutputText.Text += "G1 X-2.5 Y-2.5 E1 F400\r\n"; //Moves to the center of the pad
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    //Drawing the 10 mm trace to connect the first contact pad to the strain gauge
+                    Contact_Distance = 10;
+                    this.GCodeOutputText.Text += ";Print a 10 mm trace to connect with the strain gauge\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    SGPadLength = 2;
+                    SGPadWidth = 3;
+
+                    this.GCodeOutputText.Text += ";Print the strain gauge\r\n";
+                    //Drawing the first trace of the strain gauge
+                    this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    this.GCodeOutputText.Text += "G1 X-" + SGPadLength.ToString() + " Y-" + SGPadWidth.ToString() + "E1 F400\r\n";
+                    Print_Pad_KnownShape(SGPadLength, SGPadWidth); //Prints the first 2x3 mm pad in the strain gauge
+                    this.GCodeOutputText.Text += "G1 X-" + SGPadLength.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    DistanceToCover = SGLength - SGPadLength; //Used in the for loop to check how much distance is left to cover for printing the strain gauge's length
+                    DistanceCovered = SGPadLength; //Used to cover how much distance in the X direction is covered
+
+                    for (int x = 0; x < DistanceToCover; x = x + (int)(SGPadLength * 2))
+                    {
+                        if ((DistanceCovered + (SGPadLength * 2)) > SGLength)
+                            break; //Before printing, if it prints the pattern and overshoots, it will break from the for loop before printing the pattern
+
+
+                        //This section will print the pattern: pad, up, pad, down
+
+                        this.GCodeOutputText.Text += "G1 X-" + SGPadLength.ToString() + "E1 F400\r\n";
+                        Print_Pad_KnownShape(SGPadLength, SGPadWidth); //Pad
+                        this.GCodeOutputText.Text += "G1 X-" + SGPadLength.ToString() + " Y-" + SGPadWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += ";\r\n"; //Up
+                        this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += ";\r\n";
+                        this.GCodeOutputText.Text += "G1 X-" + SGPadLength.ToString() + " Y-" + SGPadWidth.ToString() + "E1 F400\r\n";
+                        Print_Pad_KnownShape(SGPadLength, SGPadWidth); //Pad
+                        this.GCodeOutputText.Text += "G1 X-" + SGPadWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += ";\r\n"; //Down
+                        this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 Y" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 Y-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += ";\r\n";
+
+                        DistanceCovered += (int)(SGPadLength * 2); //Makes sure to record how much distance was covered to check in the beginning of the for loop
+                    }
+
+                    this.GCodeOutputText.Text += ";End the printing of the strain gauge\r\n;\r\n";
+
+                    //Prints the second 10 mm trace
+                    this.GCodeOutputText.Text += ";Print a 10 mm trace to connect with the left contact pad\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 Y-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    RemainingDistance = SGLength - DistanceCovered; //If any length is left but not covered because this function stopped early, then it will print a trace along the X axis to cover for that distance
+                    this.GCodeOutputText.Text += "G1 X-" + RemainingDistance.ToString() + " E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-2.5 Y-2.5 E1 F400\r\n"; //Moves to print the final contact pad
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    Print_Pad_KnownShape(5, 5); //Prints the final 5x5 mm contact pad
+                    break;
+                    
+                case 225:
+
+                    break;
+
+                case 270:
+                    Print_Pad_KnownShape(5, 5); //Prints the first contact pad
+                    this.GCodeOutputText.Text += "G1 X-2.5 Y-2.5 E1 F400\r\n"; //Moves to the center of the pad
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    //Drawing the 10 mm trace to connect the first contact pad to the strain gauge
+                    Contact_Distance = 10;
+                    this.GCodeOutputText.Text += ";Print a 10 mm trace to connect with the strain gauge\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    SGPadLength = 3;
+                    SGPadWidth = 2;
+
+                    this.GCodeOutputText.Text += ";Print the strain gauge\r\n";
+                    //Drawing the first trace of the strain gauge
+                    this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    this.GCodeOutputText.Text += "G1 X-" + SGPadLength.ToString() + "E1 F400\r\n";
+                    Print_Pad_KnownShape(SGPadLength, SGPadWidth); //Prints the first 2x3 mm pad in the strain gauge
+                    this.GCodeOutputText.Text += ";\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    DistanceToCover = SGLength - SGPadLength; //Used in the for loop to check how much distance is left to cover for printing the strain gauge's length
+                    DistanceCovered = SGPadLength; //Used to cover how much distance in the X direction is covered
+
+                    for (int x = 0; x < DistanceToCover; x = x + (int)(SGPadLength * 2))
+                    {
+                        if ((DistanceCovered + (SGPadLength * 2)) > SGLength)
+                            break; //Before printing, if it prints the pattern and overshoots, it will break from the for loop before printing the pattern
+
+
+                        //This section will print the pattern: pad, up, pad, down
+                        Print_Pad_KnownShape(SGPadLength, SGPadWidth); //Pad
+                        this.GCodeOutputText.Text += "G1 X-" + SGPadLength.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += ";\r\n"; //Up
+                        this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += ";\r\n";
+                        this.GCodeOutputText.Text += "G1 X-" + SGPadLength.ToString() + "E1 F400\r\n";
+                        Print_Pad_KnownShape(SGPadLength, SGPadWidth); //Prints the first 2x3 mm pad in the strain gauge
+                        this.GCodeOutputText.Text += ";\r\n"; //Down
+                        this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 X" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += "G1 X-" + SGWidth.ToString() + "E1 F400\r\n";
+                        this.GCodeOutputText.Text += ";\r\n";
+
+                        DistanceCovered += (int)(SGPadLength * 2); //Makes sure to record how much distance was covered to check in the beginning of the for loop
+                    }
+
+                    this.GCodeOutputText.Text += ";End the printing of the strain gauge\r\n;\r\n";
+
+                    //Prints the second 10 mm trace
+                    this.GCodeOutputText.Text += ";Print a 10 mm trace to connect with the left contact pad\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-" + Contact_Distance.ToString() + "E1 F400\r\n";
+                    RemainingDistance = SGLength - DistanceCovered; //If any length is left but not covered because this function stopped early, then it will print a trace along the X axis to cover for that distance
+                    this.GCodeOutputText.Text += "G1 Y" + RemainingDistance.ToString() + " E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-2.5 Y-2.5 E1 F400\r\n"; //Moves to print the final contact pad
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    Print_Pad_KnownShape(5, 5); //Prints the final 5x5 mm contact pad
+                    break;
+
+                case 315:
+
+                    break;
+
+                case 360:
+
+                    break;
             }
 
-            this.GCodeOutputText.Text += ";End the printing of the strain gauge\r\n;\r\n";
-
-            //Prints the second 10 mm trace
-            this.GCodeOutputText.Text += ";Print a 10 mm trace to connect with the left contact pad\r\n";
-            this.GCodeOutputText.Text += "G1 Y" + Contact_Distance.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y-" + Contact_Distance.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y" + Contact_Distance.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y-" + Contact_Distance.ToString() + "E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 Y" + Contact_Distance.ToString() + "E1 F400\r\n";
-            decimal RemainingDistance = SGLength - DistanceCovered; //If any length is left but not covered because this function stopped early, then it will print a trace along the X axis to cover for that distance
-            this.GCodeOutputText.Text += "G1 X" + RemainingDistance.ToString() + " E1 F400\r\n";
-            this.GCodeOutputText.Text += "G1 X-2.5 Y-2.5 E1 F400\r\n"; //Moves to print the final contact pad
-            this.GCodeOutputText.Text += ";\r\n";
-
-            Print_Pad_KnownShape(5, 5); //Prints the final 5x5 mm contact pad
+           
 
             if (StrainGaugeLength_X.Value <= 5)
                 this.GCodeOutputText.Text = "STRAIN GAUGE LENGTH MUST BE OVER 5 MM\r\n";
 
         }
 
+        void Print_Element()
+        {
+            //This part of the code sets flags if each button is clicked
+            //The flags will be used in switch cases further in the program
+            decimal PartIncluded_Flag = 0;
+            if (PC_PartIncluded.Checked) PartIncluded_Flag = 1;
+            if (BC_PartIncluded.Checked) PartIncluded_Flag = 2;
+            if (WiFi_PartIncluded.Checked) PartIncluded_Flag = 3;
+            if (Pad_PartIncluded.Checked) PartIncluded_Flag = 4;
+            if (SG_PartIncluded.Checked) PartIncluded_Flag = 5;
+
+            switch (PartIncluded_Flag) //Checks which artifact is to be used so that it can print the footprint of said artifact
+            {
+                case 1:
+                    //Case 1 ==> For printing the footprint of the DC power connector
+
+                    //Opens a picture of a suggested artifact's void dimensions
+                    //MAKE SURE THE FILE PATH OF THE IMAGE IS ENTERED HERE WHEN TRANSFERING THIS PROJECT'S FOLDER ACROSS COMPUTERS
+                    //Image to summon: PC_Void.png (GCodeGeneratorV8\Pictures)
+                    VoidSuggestion.ImageLocation = @"C:\Users\Datta\OneDrive\Documents\GitHub\4d-printer-gcode-generator\G-CODE Generator\Pictures\PC_Void.png";
+
+                    this.GCodeOutputText.Text += ";The following section will print the footprint for a DC power connector using a liquid extruder\r\n";
+                    this.GCodeOutputText.Text += ";The printer will begin at the center of the GND pin and end at the center of the live pad\r\n";
+                    this.GCodeOutputText.Text += ";Each pad is of the size 5x5 mm and are intended to fit inside the suggested void dimensions (TAKEN FROM GCODEGENERATOR)\r\n\r\n";
+
+                    Print_SquarePad(5); //Prints the ground pad
+
+                    //Moves to the next pad
+                    this.GCodeOutputText.Text += ";\r\n";
+                    this.GCodeOutputText.Text += "G0 Z4 F400\r\n";
+                    this.GCodeOutputText.Text += "G0 Y15 F400\r\n";
+                    this.GCodeOutputText.Text += "G0 Z-4 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    Print_SquarePad(5); //Prints the shunt pad
+
+                    //Moves to the final third pad
+                    this.GCodeOutputText.Text += ";\r\n";
+                    this.GCodeOutputText.Text += "G0 Z4 F400\r\n";
+                    this.GCodeOutputText.Text += "G0 X-9 Y-10 F400\r\n";
+                    this.GCodeOutputText.Text += "G0 Z-4 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    Print_SquarePad(5); //Prints the live pad
+
+                    break;
+                case 2:
+                    //Case 2 ==> For printing the footprint of the button cell
+
+                    this.GCodeOutputText.Text += "TO BE ADDED\r\n";
+                    break;
+                case 3:
+                    //Case 3 ==> For printing the footprint of the ESP8285 Wifi Module
+                    //This section will print 4 pins: VCC, GND, IO2 for remotely controlling one pin, and ADC for reading voltage
+
+                    //Opens a picture of a suggested artifact's void dimensions
+                    //MAKE SURE THE FILE PATH OF THE IMAGE IS ENTERED HERE WHEN TRANSFERING THIS PROJECT'S FOLDER ACROSS COMPUTERS
+                    //Image to summon: WiFi_Void.png (GCodeGeneratorV8\Pictures)
+                    VoidSuggestion.ImageLocation = @"C:\Users\Datta\OneDrive\Documents\GitHub\4d-printer-gcode-generator\G-CODE Generator\Pictures\WiFi_Void.png";
+
+                    this.GCodeOutputText.Text += ";The following section will print the footprint for an ESP 8285 WiFi Module using a liquid extruder\r\n";
+                    this.GCodeOutputText.Text += ";The printer will print traces connecting to the VCC, GND, ADC, and IO2 pins\r\n";
+                    this.GCodeOutputText.Text += ";The printer will begin at the beginning of the ADC pin facing the module, print the VCC pin, GND pin, and finally the IO2 pin, ending under the WiFi module\r\n";
+                    this.GCodeOutputText.Text += ";These traces are intended to fit inside the suggested void dimensions (TAKEN FROM GCODEGENERATOR)\r\n";
+
+                    //Prints the trace that connects to the ADC pin
+                    this.GCodeOutputText.Text += ";Printing the ADC pin\r\n";
+                    this.GCodeOutputText.Text += "G1 X8 E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-8 E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X8 E1 F400\r\n";
+
+                    //Moves to the next pin
+                    this.GCodeOutputText.Text += ";\r\n";
+                    this.GCodeOutputText.Text += "G0 Z4 F400\r\n";
+                    this.GCodeOutputText.Text += "G0 Y9 F400\r\n";
+                    this.GCodeOutputText.Text += "G0 Z-4 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    //Prints the trace that connects to the VCC pin
+                    this.GCodeOutputText.Text += ";Printing the VCC pin\r\n";
+                    this.GCodeOutputText.Text += "G1 X-8 E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X8 E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-8 E1 F400\r\n";
+
+                    //Moves to the next pin
+                    this.GCodeOutputText.Text += ";\r\n";
+                    this.GCodeOutputText.Text += "G0 Z4 F400\r\n";
+                    this.GCodeOutputText.Text += "G0 X-4.5 F400\r\n";
+                    this.GCodeOutputText.Text += "G0 Z-4 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    //Prints the trace that connects to the GND pin
+                    this.GCodeOutputText.Text += ";Printing the GND Pin\r\n";
+                    this.GCodeOutputText.Text += "G1 X-6 E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X6 E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-6 E1 F400\r\n";
+
+                    //Moves to the next pin
+                    this.GCodeOutputText.Text += ";\r\n";
+                    this.GCodeOutputText.Text += "G0 Z4 F400\r\n";
+                    this.GCodeOutputText.Text += "G0 Y-1.5 F400\r\n";
+                    this.GCodeOutputText.Text += "G0 Z-4 F400\r\n";
+                    this.GCodeOutputText.Text += ";\r\n";
+
+                    //Prints the trace that connects to the IO2 pin
+                    this.GCodeOutputText.Text += ";Printing the IO2 Pin\r\n";
+                    this.GCodeOutputText.Text += "G1 X6 E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X-6 E1 F400\r\n";
+                    this.GCodeOutputText.Text += "G1 X6 E1 F400\r\n";
+
+                    break;
+                case 4:
+                    //Case 4 ==> For printing a pad of any known side length
+
+                    Print_SquarePad(PadSize_Side.Value);
+                    break;
+                case 5:
+                    //Case 5 ==> For printing a strain gauge of any known length and width
+
+                    Print_StrainGauge(StrainGaugeLength_X.Value, StrainGaugeWidth_Y.Value, RotationOfPart.Value);
+                    break;
+            }
+        }
 
         //Enter your code for VOIDS Radio Button here
 

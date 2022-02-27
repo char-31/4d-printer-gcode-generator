@@ -42,6 +42,7 @@ G21 ; set units to millimeters
 G90 ; use absolute coordinates
 M82 ; use absolute distances for extrusion
 G92 E0
+;END INTIALIZATION
 ; Filament gcode
 ;LAYER_CHANGE
 ;Z:0.2

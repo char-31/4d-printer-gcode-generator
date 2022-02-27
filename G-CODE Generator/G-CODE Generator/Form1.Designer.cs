@@ -61,6 +61,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.RotationOfPart = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.VoidSuggestion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ID_GUI_Value)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.XOrigin_GUI_Value)).BeginInit();
@@ -68,6 +70,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PadSize_Side)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StrainGaugeLength_X)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StrainGaugeWidth_Y)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RotationOfPart)).BeginInit();
             this.SuspendLayout();
             // 
             // button_generate
@@ -75,7 +78,7 @@
             this.button_generate.Location = new System.Drawing.Point(1063, 1358);
             this.button_generate.Margin = new System.Windows.Forms.Padding(4);
             this.button_generate.Name = "button_generate";
-            this.button_generate.Size = new System.Drawing.Size(171, 52);
+            this.button_generate.Size = new System.Drawing.Size(114, 35);
             this.button_generate.TabIndex = 0;
             this.button_generate.Text = "OK";
             this.button_generate.UseVisualStyleBackColor = true;
@@ -87,7 +90,7 @@
             this.base_radiobutton.Location = new System.Drawing.Point(21, 20);
             this.base_radiobutton.Margin = new System.Windows.Forms.Padding(4);
             this.base_radiobutton.Name = "base_radiobutton";
-            this.base_radiobutton.Size = new System.Drawing.Size(172, 41);
+            this.base_radiobutton.Size = new System.Drawing.Size(119, 29);
             this.base_radiobutton.TabIndex = 1;
             this.base_radiobutton.TabStop = true;
             this.base_radiobutton.Text = "Base Layer";
@@ -99,7 +102,7 @@
             this.silver_radiobutton.Location = new System.Drawing.Point(21, 135);
             this.silver_radiobutton.Margin = new System.Windows.Forms.Padding(4);
             this.silver_radiobutton.Name = "silver_radiobutton";
-            this.silver_radiobutton.Size = new System.Drawing.Size(191, 41);
+            this.silver_radiobutton.Size = new System.Drawing.Size(131, 29);
             this.silver_radiobutton.TabIndex = 2;
             this.silver_radiobutton.TabStop = true;
             this.silver_radiobutton.Text = "Silver Traces";
@@ -111,7 +114,7 @@
             this.void_radiobutton.Location = new System.Drawing.Point(21, 267);
             this.void_radiobutton.Margin = new System.Windows.Forms.Padding(4);
             this.void_radiobutton.Name = "void_radiobutton";
-            this.void_radiobutton.Size = new System.Drawing.Size(113, 41);
+            this.void_radiobutton.Size = new System.Drawing.Size(81, 29);
             this.void_radiobutton.TabIndex = 3;
             this.void_radiobutton.TabStop = true;
             this.void_radiobutton.Text = "Voids";
@@ -123,7 +126,7 @@
             this.glue_radiobutton.Location = new System.Drawing.Point(21, 1177);
             this.glue_radiobutton.Margin = new System.Windows.Forms.Padding(4);
             this.glue_radiobutton.Name = "glue_radiobutton";
-            this.glue_radiobutton.Size = new System.Drawing.Size(218, 41);
+            this.glue_radiobutton.Size = new System.Drawing.Size(150, 29);
             this.glue_radiobutton.TabIndex = 4;
             this.glue_radiobutton.TabStop = true;
             this.glue_radiobutton.Text = "Placing of Part";
@@ -135,7 +138,7 @@
             this.resin_button.Location = new System.Drawing.Point(21, 1228);
             this.resin_button.Margin = new System.Windows.Forms.Padding(4);
             this.resin_button.Name = "resin_button";
-            this.resin_button.Size = new System.Drawing.Size(219, 41);
+            this.resin_button.Size = new System.Drawing.Size(151, 29);
             this.resin_button.TabIndex = 5;
             this.resin_button.TabStop = true;
             this.resin_button.Text = "Sealing of Part";
@@ -147,7 +150,7 @@
             this.top_radiobutton.Location = new System.Drawing.Point(21, 1280);
             this.top_radiobutton.Margin = new System.Windows.Forms.Padding(4);
             this.top_radiobutton.Name = "top_radiobutton";
-            this.top_radiobutton.Size = new System.Drawing.Size(161, 41);
+            this.top_radiobutton.Size = new System.Drawing.Size(112, 29);
             this.top_radiobutton.TabIndex = 6;
             this.top_radiobutton.TabStop = true;
             this.top_radiobutton.Text = "Top Layer";
@@ -160,7 +163,7 @@
             this.GCodeOutputText.Multiline = true;
             this.GCodeOutputText.Name = "GCodeOutputText";
             this.GCodeOutputText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.GCodeOutputText.Size = new System.Drawing.Size(746, 1392);
+            this.GCodeOutputText.Size = new System.Drawing.Size(687, 1288);
             this.GCodeOutputText.TabIndex = 7;
             // 
             // VoidSuggestion
@@ -168,7 +171,7 @@
             this.VoidSuggestion.Location = new System.Drawing.Point(22, 444);
             this.VoidSuggestion.Margin = new System.Windows.Forms.Padding(6);
             this.VoidSuggestion.Name = "VoidSuggestion";
-            this.VoidSuggestion.Size = new System.Drawing.Size(647, 653);
+            this.VoidSuggestion.Size = new System.Drawing.Size(431, 441);
             this.VoidSuggestion.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.VoidSuggestion.TabIndex = 8;
             this.VoidSuggestion.TabStop = false;
@@ -176,10 +179,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1328, 17);
-            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label1.Location = new System.Drawing.Point(1328, 22);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(379, 37);
+            this.label1.Size = new System.Drawing.Size(252, 25);
             this.label1.TabIndex = 9;
             this.label1.Text = "Liquid Extruder Inner Diameter";
             // 
@@ -189,62 +192,62 @@
             this.ID_GUI_Value.Location = new System.Drawing.Point(1328, 59);
             this.ID_GUI_Value.Margin = new System.Windows.Forms.Padding(6);
             this.ID_GUI_Value.Name = "ID_GUI_Value";
-            this.ID_GUI_Value.Size = new System.Drawing.Size(281, 43);
+            this.ID_GUI_Value.Size = new System.Drawing.Size(187, 31);
             this.ID_GUI_Value.TabIndex = 10;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1328, 115);
-            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label2.Location = new System.Drawing.Point(1328, 96);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(114, 37);
+            this.label2.Size = new System.Drawing.Size(77, 25);
             this.label2.TabIndex = 11;
             this.label2.Text = "X Origin";
             // 
             // XOrigin_GUI_Value
             // 
-            this.XOrigin_GUI_Value.Location = new System.Drawing.Point(1328, 157);
+            this.XOrigin_GUI_Value.Location = new System.Drawing.Point(1328, 127);
             this.XOrigin_GUI_Value.Margin = new System.Windows.Forms.Padding(6);
             this.XOrigin_GUI_Value.Name = "XOrigin_GUI_Value";
-            this.XOrigin_GUI_Value.Size = new System.Drawing.Size(281, 43);
+            this.XOrigin_GUI_Value.Size = new System.Drawing.Size(187, 31);
             this.XOrigin_GUI_Value.TabIndex = 12;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1328, 213);
-            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label3.Location = new System.Drawing.Point(1328, 164);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(113, 37);
+            this.label3.Size = new System.Drawing.Size(76, 25);
             this.label3.TabIndex = 13;
             this.label3.Text = "Y Origin";
             // 
             // YOrigin_GUI_Value
             // 
-            this.YOrigin_GUI_Value.Location = new System.Drawing.Point(1328, 255);
+            this.YOrigin_GUI_Value.Location = new System.Drawing.Point(1328, 195);
             this.YOrigin_GUI_Value.Margin = new System.Windows.Forms.Padding(6);
             this.YOrigin_GUI_Value.Name = "YOrigin_GUI_Value";
-            this.YOrigin_GUI_Value.Size = new System.Drawing.Size(281, 43);
+            this.YOrigin_GUI_Value.Size = new System.Drawing.Size(187, 31);
             this.YOrigin_GUI_Value.TabIndex = 14;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1328, 311);
-            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label4.Location = new System.Drawing.Point(1328, 232);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(577, 37);
+            this.label4.Size = new System.Drawing.Size(388, 25);
             this.label4.TabIndex = 15;
             this.label4.Text = "Which parts are being used? (For now pick one)";
             // 
             // PC_PartIncluded
             // 
             this.PC_PartIncluded.AutoSize = true;
-            this.PC_PartIncluded.Location = new System.Drawing.Point(1382, 353);
+            this.PC_PartIncluded.Location = new System.Drawing.Point(1378, 268);
             this.PC_PartIncluded.Margin = new System.Windows.Forms.Padding(6);
             this.PC_PartIncluded.Name = "PC_PartIncluded";
-            this.PC_PartIncluded.Size = new System.Drawing.Size(295, 41);
+            this.PC_PartIncluded.Size = new System.Drawing.Size(202, 29);
             this.PC_PartIncluded.TabIndex = 16;
             this.PC_PartIncluded.Text = "DC Power Connector";
             this.PC_PartIncluded.UseVisualStyleBackColor = true;
@@ -252,10 +255,10 @@
             // BC_PartIncluded
             // 
             this.BC_PartIncluded.AutoSize = true;
-            this.BC_PartIncluded.Location = new System.Drawing.Point(1382, 409);
+            this.BC_PartIncluded.Location = new System.Drawing.Point(1378, 309);
             this.BC_PartIncluded.Margin = new System.Windows.Forms.Padding(6);
             this.BC_PartIncluded.Name = "BC_PartIncluded";
-            this.BC_PartIncluded.Size = new System.Drawing.Size(180, 41);
+            this.BC_PartIncluded.Size = new System.Drawing.Size(124, 29);
             this.BC_PartIncluded.TabIndex = 17;
             this.BC_PartIncluded.Text = "Button Cell";
             this.BC_PartIncluded.UseVisualStyleBackColor = true;
@@ -263,10 +266,10 @@
             // WiFi_PartIncluded
             // 
             this.WiFi_PartIncluded.AutoSize = true;
-            this.WiFi_PartIncluded.Location = new System.Drawing.Point(1382, 464);
+            this.WiFi_PartIncluded.Location = new System.Drawing.Point(1378, 350);
             this.WiFi_PartIncluded.Margin = new System.Windows.Forms.Padding(6);
             this.WiFi_PartIncluded.Name = "WiFi_PartIncluded";
-            this.WiFi_PartIncluded.Size = new System.Drawing.Size(317, 41);
+            this.WiFi_PartIncluded.Size = new System.Drawing.Size(217, 29);
             this.WiFi_PartIncluded.TabIndex = 18;
             this.WiFi_PartIncluded.Text = "ESP 8285 WiFi Module";
             this.WiFi_PartIncluded.UseVisualStyleBackColor = true;
@@ -274,10 +277,10 @@
             // Pad_PartIncluded
             // 
             this.Pad_PartIncluded.AutoSize = true;
-            this.Pad_PartIncluded.Location = new System.Drawing.Point(1382, 520);
+            this.Pad_PartIncluded.Location = new System.Drawing.Point(1378, 391);
             this.Pad_PartIncluded.Margin = new System.Windows.Forms.Padding(6);
             this.Pad_PartIncluded.Name = "Pad_PartIncluded";
-            this.Pad_PartIncluded.Size = new System.Drawing.Size(182, 41);
+            this.Pad_PartIncluded.Size = new System.Drawing.Size(127, 29);
             this.Pad_PartIncluded.TabIndex = 19;
             this.Pad_PartIncluded.Text = "Square Pad";
             this.Pad_PartIncluded.UseVisualStyleBackColor = true;
@@ -285,135 +288,157 @@
             // PadSize_Side
             // 
             this.PadSize_Side.DecimalPlaces = 1;
-            this.PadSize_Side.Location = new System.Drawing.Point(1414, 575);
+            this.PadSize_Side.Location = new System.Drawing.Point(1408, 432);
             this.PadSize_Side.Margin = new System.Windows.Forms.Padding(6);
             this.PadSize_Side.Name = "PadSize_Side";
-            this.PadSize_Side.Size = new System.Drawing.Size(281, 43);
+            this.PadSize_Side.Size = new System.Drawing.Size(187, 31);
             this.PadSize_Side.TabIndex = 20;
             // 
             // SG_PartIncluded
             // 
             this.SG_PartIncluded.AutoSize = true;
-            this.SG_PartIncluded.Location = new System.Drawing.Point(1382, 636);
+            this.SG_PartIncluded.Location = new System.Drawing.Point(1377, 475);
             this.SG_PartIncluded.Margin = new System.Windows.Forms.Padding(6);
             this.SG_PartIncluded.Name = "SG_PartIncluded";
-            this.SG_PartIncluded.Size = new System.Drawing.Size(201, 41);
+            this.SG_PartIncluded.Size = new System.Drawing.Size(138, 29);
             this.SG_PartIncluded.TabIndex = 21;
             this.SG_PartIncluded.Text = "Strain Gauge";
             this.SG_PartIncluded.UseVisualStyleBackColor = true;
             // 
             // StrainGaugeLength_X
             // 
-            this.StrainGaugeLength_X.Location = new System.Drawing.Point(1414, 729);
+            this.StrainGaugeLength_X.Location = new System.Drawing.Point(1408, 541);
             this.StrainGaugeLength_X.Margin = new System.Windows.Forms.Padding(6);
             this.StrainGaugeLength_X.Name = "StrainGaugeLength_X";
-            this.StrainGaugeLength_X.Size = new System.Drawing.Size(281, 43);
+            this.StrainGaugeLength_X.Size = new System.Drawing.Size(187, 31);
             this.StrainGaugeLength_X.TabIndex = 22;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1414, 686);
-            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label5.Location = new System.Drawing.Point(1410, 510);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(138, 37);
+            this.label5.Size = new System.Drawing.Size(92, 25);
             this.label5.TabIndex = 23;
             this.label5.Text = "Length (X)";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1414, 784);
-            this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label6.Location = new System.Drawing.Point(1408, 578);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(127, 37);
+            this.label6.Size = new System.Drawing.Size(85, 25);
             this.label6.TabIndex = 24;
             this.label6.Text = "Width (Y)";
             // 
             // StrainGaugeWidth_Y
             // 
-            this.StrainGaugeWidth_Y.Location = new System.Drawing.Point(1414, 827);
+            this.StrainGaugeWidth_Y.Location = new System.Drawing.Point(1408, 609);
             this.StrainGaugeWidth_Y.Margin = new System.Windows.Forms.Padding(6);
             this.StrainGaugeWidth_Y.Name = "StrainGaugeWidth_Y";
-            this.StrainGaugeWidth_Y.Size = new System.Drawing.Size(281, 43);
+            this.StrainGaugeWidth_Y.Size = new System.Drawing.Size(187, 31);
             this.StrainGaugeWidth_Y.TabIndex = 25;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(874, 1034);
-            this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label7.Location = new System.Drawing.Point(601, 1027);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(170, 37);
+            this.label7.Size = new System.Drawing.Size(115, 25);
             this.label7.TabIndex = 26;
             this.label7.Text = "Feb 25, 2022";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(874, 1095);
-            this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label8.Location = new System.Drawing.Point(601, 1068);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(591, 37);
+            this.label8.Size = new System.Drawing.Size(394, 25);
             this.label8.TabIndex = 27;
             this.label8.Text = "ONLY Base Layer and Silver Traces currently work";
-            //this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(874, 1132);
-            this.label9.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label9.Location = new System.Drawing.Point(601, 1093);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(875, 37);
+            this.label9.Size = new System.Drawing.Size(586, 25);
             this.label9.TabIndex = 28;
             this.label9.Text = "Make sure all file paths are corrected in Form1.cs before running this GUI";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(874, 1169);
-            this.label10.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label10.Location = new System.Drawing.Point(601, 1118);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(989, 37);
+            this.label10.Size = new System.Drawing.Size(662, 25);
             this.label10.TabIndex = 29;
             this.label10.Text = "Base Layer will give the GCode of the bottom layer given the GCode of a CAD part";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(874, 1280);
-            this.label11.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label11.Location = new System.Drawing.Point(601, 1193);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(870, 37);
+            this.label11.Size = new System.Drawing.Size(585, 25);
             this.label11.TabIndex = 30;
             this.label11.Text = "Silver Traces will print footprints of parts, square pads, and strain gauges";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(938, 1206);
-            this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label12.Location = new System.Drawing.Point(643, 1143);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(673, 37);
+            this.label12.Size = new System.Drawing.Size(453, 25);
             this.label12.TabIndex = 31;
             this.label12.Text = "Enter your GCode of your CAD part in the GCode folder";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(938, 1243);
-            this.label13.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label13.Location = new System.Drawing.Point(643, 1168);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(357, 37);
+            this.label13.Size = new System.Drawing.Size(240, 25);
             this.label13.TabIndex = 32;
             this.label13.Text = "Enter its file path in Form1.cs";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(1377, 646);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(388, 25);
+            this.label14.TabIndex = 33;
+            this.label14.Text = "Rotation of Part? (Angle that is a multiple of 45)";
+            // 
+            // RotationOfPart
+            // 
+            this.RotationOfPart.Location = new System.Drawing.Point(1399, 674);
+            this.RotationOfPart.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.RotationOfPart.Name = "RotationOfPart";
+            this.RotationOfPart.Size = new System.Drawing.Size(180, 31);
+            this.RotationOfPart.TabIndex = 34;
+            // 
             // selection_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2713, 1436);
+            this.ClientSize = new System.Drawing.Size(2760, 1436);
+            this.Controls.Add(this.RotationOfPart);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -458,6 +483,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PadSize_Side)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StrainGaugeLength_X)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StrainGaugeWidth_Y)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RotationOfPart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -498,5 +524,7 @@
         private Label label11;
         private Label label12;
         private Label label13;
+        private Label label14;
+        private NumericUpDown RotationOfPart;
     }
 }
